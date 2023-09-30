@@ -5,7 +5,7 @@ function Dropdown() {
   return (
     <section className="flex flex-col">
       <Menu>
-        <Menu.Button>Snacks & Godis</Menu.Button>
+        <Menu.Button className="text-left font-bold">Snacks & Godis</Menu.Button>
         <Menu.Items className="flex flex-col">
           <Menu.Item>
             {({ active }) => (
@@ -32,7 +32,7 @@ function Dropdown() {
       </Menu>
       {/* --------------------------- */}
       <Menu>
-        <Menu.Button>Skafferi</Menu.Button>
+        <Menu.Button className="text-left font-bold">Skafferi</Menu.Button>
         <Menu.Items className="flex flex-col">
           <Menu.Item>
             {({ active }) => (
