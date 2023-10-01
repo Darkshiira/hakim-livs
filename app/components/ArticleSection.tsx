@@ -1,5 +1,8 @@
 import Productcard from './ProductCard';
 
+// Högra sektionen på första sidan där alla produkter laddas in
+// TODO: Gör så Productcard's laddas in dynamiskt med unika produkter (detta är bara en mall / första utkast)
+
 const ArticleSection = () => {
   return (
     <>
