@@ -1,5 +1,8 @@
 import Image from 'next/image';
 
+// Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
+// TODO: Gör så att innehållet för varje produkt laddas in dynamiskt, lägg till funktion på knapparna, få bilden att ladda in
+
 const Productcard = () => {
   return (
     <>
