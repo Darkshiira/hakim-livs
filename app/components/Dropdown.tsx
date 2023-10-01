@@ -24,7 +24,7 @@ function Dropdown() {
           <Menu.Item>
             {({ active }) => (
               <a className={`${active && 'bg-blue-500'}`} href="/account-settings">
-                Lakris
+                Lakrits
               </a>
             )}
           </Menu.Item>
