@@ -1,6 +1,9 @@
 'use client';
 import { Menu } from '@headlessui/react';
 
+// Dropdown menyn som visar de olika kategorierna i aside på första sidan
+// TODO: Ändra så länkarna går till rätt produkter
+
 function Dropdown() {
   return (
     <section className="flex flex-col">
