@@ -1,3 +1,5 @@
+// Mall för Hero / Billboard där reklamen ska in så småningom
+
 const Hero = () => {
   return (
     <>
