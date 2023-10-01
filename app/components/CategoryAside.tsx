@@ -1,5 +1,7 @@
 import Dropdown from './Dropdown';
 
+// Aside på första sidan där matkategorierna finns
+
 const CategoryAside = () => {
   return (
     <>
