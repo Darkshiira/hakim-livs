@@ -1,3 +1,5 @@
+// Basic footer där eventuell info ska in sen som t.ex kontaktuppgifter mm.
+
 const Footer = () => {
   return (
     <>
