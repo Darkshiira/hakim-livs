@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+// Navbaren högst upp på första sidan
+// TODO: Fixa funktionalitet på login och varukorg
+
 const Nav = () => {
   return (
     <>
