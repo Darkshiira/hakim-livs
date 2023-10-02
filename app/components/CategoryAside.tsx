@@ -1,8 +1,9 @@
-'use client'
+"use client"
 
 import Dropdown from './Dropdown';
 import axios from 'axios';
 import { create } from 'zustand';
+import { useEffect} from 'react'
 
 type State = {
   items:Map<string, string>;
@@ -24,7 +25,7 @@ const CategoryAside = () => {
     const updateItems = useItemStore((state) => state.updateItems)
     const itemsitr = items.entries()
 
-
+useEffect(() => {
         axios.get('http://localhost:3001/api/categories', {})
             .then(function (response) {
                 response.data.forEach((item: { id: string; name: string; }) => {
@@ -34,16 +35,18 @@ const CategoryAside = () => {
             .catch(function (error) {
                 console.log(error);
             });
+    }, [])
+
     
   return (
     <>
-      <aside className="p-4 bg-purple-200 w-52">
+      <div className="p-4 bg-purple-200 w-52">
         <h2 className="text-center font-bold text-lg">Kategorier</h2>
         {Array.from(itemsitr).map(([key, value]) => (
 
 <Dropdown props = {value} key={key} />
 ))}
-      </aside>
+      </div>
     </>
   );
 };
