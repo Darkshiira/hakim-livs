@@ -20,8 +20,8 @@ const CategoryAside = () => {
     useEffect(() => {
         axios.get('http://localhost:3001/api/categories', {})
             .then(function (response) {
-                response.data.forEach((item: { id: string; name: string; }) => {
-                    items.set(item.id, item.name)
+                response.data.forEach((item: { id: string; title: string; }) => {
+                    items.set(item.id, item.title)
                     updateUpdate(!update)
                 });
             })
