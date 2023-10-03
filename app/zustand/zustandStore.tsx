@@ -1,11 +1,10 @@
 import {create} from 'zustand'
 
-
+// Zustand store to keep track of the items in the category dropdown
 type State = {
     items:Map<string, string>;
     update: boolean;
   }
-  
   type Action = {
     updateItems: (items: State['items']) => void
     updateUpdate: (update: State['update']) => void

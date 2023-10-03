@@ -10,15 +10,16 @@ import { useEffect} from 'react'
 // Aside på första sidan där matkategorierna finns
 
 const CategoryAside = () => {
+
     const items = useItemStore((state) => state.items)
     const updateItems = useItemStore((state) => state.updateItems)
     const update = useItemStore((state) => state.update)
-    const updateUpdate = useItemStore((state) => state.updateUpdate)
-    
+    const updateUpdate = useItemStore((state) => state.updateUpdate)    
     const itemsitr = items.entries()
+// Get the categories from the database and add them to the dropdown
 
     useEffect(() => {
-        axios.get('http://localhost:3001/api/categories', {})
+        axios.get('http://localhost:3001/api/categories', {}) //TODO: Change to the correct url
             .then(function (response) {
                 response.data.forEach((item: { id: string; title: string; }) => {
                     items.set(item.id, item.title)
