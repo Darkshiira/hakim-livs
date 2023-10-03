@@ -4,11 +4,11 @@ import { Menu } from '@headlessui/react';
 // Dropdown menyn som visar de olika kategorierna i aside på första sidan
 // TODO: Ändra så länkarna går till rätt produkter
 
-function Dropdown() {
+function Dropdown({props = {}}: {props?: any}) {
   return (
     <section className="flex flex-col">
       <Menu>
-        <Menu.Button className="text-left font-bold">Snacks & Godis</Menu.Button>
+        <Menu.Button className="text-left font-bold">{props}</Menu.Button>
         <Menu.Items className="flex flex-col">
           <Menu.Item>
             {({ active }) => (
@@ -34,8 +34,8 @@ function Dropdown() {
         </Menu.Items>
       </Menu>
       {/* --------------------------- */}
-      <Menu>
-        <Menu.Button className="text-left font-bold">Skafferi</Menu.Button>
+      {/* <Menu>
+        <Menu.Button className="text-left font-bold">{props}</Menu.Button>
         <Menu.Items className="flex flex-col">
           <Menu.Item>
             {({ active }) => (
@@ -59,7 +59,7 @@ function Dropdown() {
             )}
           </Menu.Item>
         </Menu.Items>
-      </Menu>
+      </Menu> */}
     </section>
   );
 }
