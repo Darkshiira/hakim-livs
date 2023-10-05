@@ -10,6 +10,7 @@ interface ProductData {
   manufacturer: string;
   size: string;
   price: number;
+  image: string;
 }
 
 const ArticleSection: React.FC = () => {
@@ -29,8 +30,8 @@ const ArticleSection: React.FC = () => {
   return (
     <>
       <section className="p-4 bg-blue-200">
-        <div className="flex">
-          <input type="text" placeholder="Sök artikel" className="border rounded-full p-2 m-4" />
+        <div className="flex justify-center">
+          <input type="text" placeholder="Sök artikel" className="border rounded-full w-80 p-2 m-4" />
           <button className="hover:text-blue-500">Sök</button>
         </div>
         <div className="productContainer grid grid-cols-4 gap-4">
@@ -41,6 +42,7 @@ const ArticleSection: React.FC = () => {
               manufacturer={product.manufacturer}
               size={product.size}
               price={product.price}
+              image={product.image}
             />
           ))}
         </div>
