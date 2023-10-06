@@ -6,9 +6,11 @@ import { useItemStore } from "../zustand/zustandStore";
 // TODO: Ändra så länkarna går till rätt produkter
 
 function Dropdown({ props = {} }: { props?: any }) {
+  //saves the category in zustand
   const category = useItemStore((state) => state.category);
   const updateCategory = useItemStore((state) => state.updateCategory);
 
+  //onclick function that saves the category in zustand
   const sendCategory = () => {
     updateCategory(props);
   };

@@ -15,6 +15,7 @@ interface ProductData {
 }
 
 const ArticleSection: React.FC = () => {
+  //To get the category from zustand
   const category = useItemStore((state) => state.category);
   const [products, setProducts] = useState<ProductData[]>([]);
 
@@ -22,6 +23,7 @@ const ArticleSection: React.FC = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`)
       .then(function (response) {
+        //TODO: future filtrering of products
         //  const filterdproducts = response.data.filter((product: ProductData) => product.category === category);
         // setProducts(filterdproducts);
         setProducts(response.data);
