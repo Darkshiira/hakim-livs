@@ -1,16 +1,26 @@
 "use client";
 import { Menu } from "@headlessui/react";
+import { useItemStore } from "../zustand/zustandStore";
 
 // Dropdown menyn som visar de olika kategorierna i aside på första sidan
 // TODO: Ändra så länkarna går till rätt produkter
 
 function Dropdown({ props = {} }: { props?: any }) {
+  const category = useItemStore((state) => state.category);
+  const updateCategory = useItemStore((state) => state.updateCategory);
+
+  const sendCategory = () => {
+    updateCategory(props);
+  };
+
   return (
     <section className="flex flex-col">
       <Menu>
-        <Menu.Button className="text-left font-bold">{props}</Menu.Button>
+        <Menu.Button className="text-left font-bold" onClick={sendCategory}>
+          {props}
+        </Menu.Button>
         <Menu.Items className="flex flex-col">
-          <Menu.Item>
+          {/* <Menu.Item>
             {({ active }) => (
               <a
                 className={`${active && "bg-blue-500"}`}
@@ -39,7 +49,7 @@ function Dropdown({ props = {} }: { props?: any }) {
                 Lakrits
               </a>
             )}
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu.Items>
       </Menu>
       {/* --------------------------- */}
