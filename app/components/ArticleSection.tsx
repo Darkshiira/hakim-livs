@@ -12,6 +12,7 @@ interface ProductData {
   size: string;
   price: number;
   image: string;
+  category: string;
 }
 
 const ArticleSection: React.FC = () => {
@@ -23,10 +24,10 @@ const ArticleSection: React.FC = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`)
       .then(function (response) {
-        //TODO: future filtrering of products
-        //  const filterdproducts = response.data.filter((product: ProductData) => product.category === category);
-        // setProducts(filterdproducts);
-        setProducts(response.data);
+        const filterdproducts = response.data.filter(
+          (product: ProductData) => product.category === category
+        );
+        setProducts(filterdproducts);
       })
       .catch(function (error) {
         console.log(error);
