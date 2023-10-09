@@ -24,10 +24,15 @@ const ArticleSection: React.FC = () => {
     axios
       .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`)
       .then(function (response) {
-        const filterdproducts = response.data.filter(
-          (product: ProductData) => product.category === category
-        );
-        setProducts(filterdproducts);
+        if (category === "") {
+          setProducts(response.data);
+          return;
+        } else {
+          const filterdproducts = response.data.filter(
+            (product: ProductData) => product.category === category
+          );
+          setProducts(filterdproducts);
+        }
       })
       .catch(function (error) {
         console.log(error);
