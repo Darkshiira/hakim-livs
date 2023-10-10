@@ -1,7 +1,9 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { FC, CSSProperties } from 'react';
+import Image from "next/image";
+import { FC, CSSProperties } from "react";
+import { useState } from "react";
+import { useItemStore } from "../zustand/zustandStore";
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
 // TODO: lägg till funktion på knapparna
@@ -15,11 +17,39 @@ interface ProductCardProps {
 }
 
 const imageStyle: CSSProperties = {
-  objectFit: 'cover',
-  border: '1px solid #fff',
+  objectFit: "cover",
+  border: "1px solid #fff",
 };
 
-const Productcard: FC<ProductCardProps> = ({ title, manufacturer, size, price, image }) => {
+const Productcard: FC<ProductCardProps> = ({
+  title,
+  manufacturer,
+  size,
+  price,
+  image,
+}) => {
+  const basket = useItemStore((state) => state.basket);
+  const updateBasket = useItemStore((state) => state.updateBasket);
+  const [amount, setAmount] = useState(1);
+
+  const minusOne = () => {
+    if (amount === 1) {
+      return;
+    } else {
+      setAmount(amount - 1);
+    }
+  };
+
+  const plusOne = () => {
+    setAmount(amount + 1);
+  };
+
+  const buyStuffz = (title: string) => {
+    if (amount === 0) {
+      console.log("You need to buy at least one item");
+    }
+    updateBasket({ ...basket, [title]: amount });
+  };
   return (
     <>
       <div className="w-52 h-auto bg-red-200 p-2">
@@ -32,14 +62,29 @@ const Productcard: FC<ProductCardProps> = ({ title, manufacturer, size, price, i
           <p>|</p>
           <p className="product-size">{size}</p>
         </div>
-        <h2 className="text-center">{price}:-</h2>
+        <h2 className="text-center">{price * amount}:-</h2>
         <div className="amountAndPurchase flex bg-green-100 justify-between p-2 items-center">
           <div className="flex w-20 justify-between">
-            <button className="decreaseAmount w-full bg-blue-200">-</button>
-            <p className="amount">0</p>
-            <button className="increaseAmount w-full bg-blue-200">+</button>
+            <button
+              className="decreaseAmount w-full bg-blue-200"
+              onClick={minusOne}
+            >
+              -
+            </button>
+            <p className="amount">{amount}</p>
+            <button
+              className="increaseAmount w-full bg-blue-200"
+              onClick={plusOne}
+            >
+              +
+            </button>
           </div>
-          <button className="purchaseButton p-1 w-20 bg-blue-200 rounded-md">KÖP</button>
+          <button
+            className="purchaseButton p-1 w-20 bg-blue-200 rounded-md"
+            onClick={() => buyStuffz(title)}
+          >
+            KÖP
+          </button>
         </div>
       </div>
     </>
