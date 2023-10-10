@@ -1,13 +1,11 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
 import MyPopover from "./Popoverbasket";
 
 // Navbaren högst upp på första sidan
 // TODO: Fixa funktionalitet på login och varukorg
 
 const Nav = () => {
-  const [popUpBasket, setPopUpBasket] = useState(false);
 
   return (
     <>
