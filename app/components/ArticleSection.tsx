@@ -19,11 +19,12 @@ const ArticleSection: React.FC = () => {
   //To get the category from zustand
   const category = useItemStore((state) => state.category);
   const [products, setProducts] = useState<ProductData[]>([]);
-  const storeID = "000603d5-70de-4d0c-b60b-eb8025ab7edc"; //TODO FIXA RÄTT STOREID
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${storeID}/products`) //TODO FIXA RÄTT STOREID
+      .get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products`
+      ) //TODO FIXA RÄTT STOREID
       .then(function (response) {
         if (category === "") {
           setProducts(response.data);
