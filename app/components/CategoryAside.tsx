@@ -13,13 +13,13 @@ const CategoryAside = () => {
   const update = useItemStore((state) => state.update);
   const updateUpdate = useItemStore((state) => state.updateUpdate);
   const itemsitr = items.entries();
-  const storeID = "000603d5-70de-4d0c-b60b-eb8025ab7edc";//TODO FIXA RÄTT STOREID
+
   // Get the categories from the database and add them to the dropdown
 
   useEffect(() => {
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${storeID}/categories`, //TODO FIXA RÄTT STOREID
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/categories`, //TODO FIXA RÄTT STOREID
         {}
       )
       .then(function (response) {
