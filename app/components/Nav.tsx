@@ -6,10 +6,9 @@ import MyPopover from "./Popoverbasket";
 // TODO: Fixa funktionalitet på login och varukorg
 
 const Nav = () => {
-
   return (
     <>
-      <nav className="p-4 w-full bg-green-200 flex justify-between fixed">
+      <nav className="p-4 w-full bg-green-200 flex justify-between fixed z-50">
         <h1>Hakim Livs</h1>
         <div className="flex space-x-6">
           <Link href="/" className="hover:text-blue-500">
