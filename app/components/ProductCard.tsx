@@ -9,11 +9,20 @@ import { useItemStore } from "../zustand/zustandStore";
 // TODO: lägg till funktion på knapparna
 
 interface ProductCardProps {
+  id: string;
+  storeId: string;
   title: string;
-  manufacturer: string;
-  size: string;
+  description: string;
+  ingredients: string;
   price: number;
   image: string;
+  manufacturer: string;
+  category: string;
+  size: string;
+  color: string;
+  isarchived: boolean;
+  isfeatured: boolean;
+  stock: number;
 }
 
 const imageStyle: CSSProperties = {
@@ -22,16 +31,24 @@ const imageStyle: CSSProperties = {
 };
 
 const Productcard: FC<ProductCardProps> = ({
+  id,
+  storeId,
   title,
-  manufacturer,
-  size,
+  description,
+  ingredients,
   price,
   image,
+  manufacturer,
+  category,
+  size,
+  color,
+  isfeatured,
+  isarchived,
+  stock,
 }) => {
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
   const [amount, setAmount] = useState(1);
-
   const minusOne = () => {
     if (amount === 1) {
       return;
@@ -52,7 +69,12 @@ const Productcard: FC<ProductCardProps> = ({
   };
   return (
     <>
-      <div className="w-52 h-auto bg-red-200 p-2">
+      <div className="w-52 h-auto bg-red-200 p-2 relative">
+        {isfeatured === true ? (
+          <div className={"absolute z-50"}>
+            <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
+          </div>
+        ) : null}
         <div className="bg-yellow-900 p-24 relative">
           <Image src={image} alt="food" layout="fill" style={imageStyle} />
         </div>
