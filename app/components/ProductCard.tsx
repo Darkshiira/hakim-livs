@@ -4,6 +4,7 @@ import Image from "next/image";
 import { FC, CSSProperties } from "react";
 import { useState } from "react";
 import { useItemStore } from "../zustand/zustandStore";
+import toast, { Toaster } from "react-hot-toast";
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
 // TODO: lägg till funktion på knapparna
@@ -49,6 +50,7 @@ const Productcard: FC<ProductCardProps> = ({
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
   const [amount, setAmount] = useState(1);
+
   const minusOne = () => {
     if (amount === 1) {
       return;
@@ -65,7 +67,19 @@ const Productcard: FC<ProductCardProps> = ({
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
-    updateBasket([...basket, { title: title, amount: amount, price: price }]);
+    if (basket.some((item) => item.title === title)) {
+      const index = basket.findIndex((item) => item.title === title);
+      const newBasket = [...basket];
+      newBasket[index].amount = newBasket[index].amount + amount;
+      updateBasket(newBasket);
+      return;
+    }
+    updateBasket([
+      ...basket,
+      { title: title, amount: amount, price: price * amount },
+    ]);
+    setAmount(1);
+    toast.success("Added to cart!");
   };
   return (
     <>
@@ -76,12 +90,7 @@ const Productcard: FC<ProductCardProps> = ({
           </div>
         ) : null}
         <div className="bg-yellow-900 p-24 relative">
-          <Image
-            src={image}
-            alt="food"
-            layout="fill"
-            style={imageStyle}
-          />
+          <Image src={image} alt="food" layout="fill" style={imageStyle} />
         </div>
         <h1 className="product-title text-center font-bold text-lg">{title}</h1>
         <div className="flex justify-center space-x-1">

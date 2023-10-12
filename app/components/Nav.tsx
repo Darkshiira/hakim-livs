@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import MyPopover from "./Popoverbasket";
+import { Toaster } from "react-hot-toast";
 
 // Navbaren högst upp på första sidan
 // TODO: Fixa funktionalitet på login och varukorg
@@ -15,6 +16,7 @@ const Nav = () => {
             Logga in
           </Link>
           <div>
+            <Toaster />
             <MyPopover />
           </div>
         </div>

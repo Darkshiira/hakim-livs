@@ -1,11 +1,46 @@
 import { Popover } from "@headlessui/react";
 import { useItemStore } from "../zustand/zustandStore";
 import Link from "next/link";
+import toast, { Toaster } from 'react-hot-toast';
 
 type Basket = { title: string; amount: number; price: number }[];
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
+  const updateBasket = useItemStore((state) => state.updateBasket);
+
+  const increaseAmount = (title: string) => {
+    const newBasket = basket.map((item) => {
+      if (item.title === title) {
+        return {
+          ...item,
+          amount: item.amount + 1,
+          price: (item.price / item.amount) * (item.amount + 1),
+        };
+      }
+      return item;
+    });
+    updateBasket(newBasket);
+  };
+
+  const decreaseAmount = (title: string) => {
+    const newBasket = basket.map((item) => {
+      if (item.amount === 0) {
+        return item;
+      }
+      if (item.title === title) {
+        return {
+          ...item,
+          amount: item.amount - 1,
+          price: (item.price / item.amount) * (item.amount - 1),
+        };
+      }
+      return item;
+    });
+    const updatedBasket = newBasket.filter((item) => item.amount > 0);
+    updateBasket(updatedBasket);
+  };
+
   return (
     <>
       <Popover className="relative z-50 ">
@@ -20,7 +55,23 @@ export default function MyPopover() {
             {basket.map((item) => (
               <div key={item.title} className="grid grid-cols-3">
                 <p className="text-left">{item.title}</p>
-                <p className="text-center">{item.amount}</p>
+                <div className="grid grid-cols-3">
+                  <button
+                    onClick={(e) => {
+                      increaseAmount(item.title);
+                    }}
+                  >
+                    +
+                  </button>
+                  <p className="text-center">{item.amount}</p>
+                  <button
+                    onClick={(e) => {
+                      decreaseAmount(item.title);
+                    }}
+                  >
+                    -
+                  </button>
+                </div>
                 <p className="text-right">{item.price}</p>
               </div>
             ))}
