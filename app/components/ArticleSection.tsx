@@ -23,7 +23,7 @@ const ArticleSection: React.FC = () => {
   useEffect(() => {
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products/active`
       ) //TODO FIXA RÄTT STOREID
       .then(function (response) {
         if (category === "") {
