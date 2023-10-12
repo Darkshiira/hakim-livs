@@ -65,7 +65,7 @@ const Productcard: FC<ProductCardProps> = ({
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
-    updateBasket({ ...basket, [title]: amount });
+    updateBasket([...basket, { title: title, amount: amount, price: price }]);
   };
   return (
     <>
@@ -76,7 +76,12 @@ const Productcard: FC<ProductCardProps> = ({
           </div>
         ) : null}
         <div className="bg-yellow-900 p-24 relative">
-          <Image src={image} alt="food" layout="fill" style={imageStyle} />
+          <Image
+            src={image}
+            alt="food"
+            layout="fill"
+            style={imageStyle}
+          />
         </div>
         <h1 className="product-title text-center font-bold text-lg">{title}</h1>
         <div className="flex justify-center space-x-1">

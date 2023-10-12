@@ -5,7 +5,7 @@ type State = {
   items: Map<string, string>;
   update: boolean;
   category: string;
-  basket: [];
+  basket: { title: string; amount: number; price: number }[];
 };
 type Action = {
   updateItems: (items: State["items"]) => void;
@@ -22,5 +22,6 @@ export const useItemStore = create<State & Action>((set) => ({
   category: "",
   updateCategory: (category: string) => set(() => ({ category: category })),
   basket: [],
-  updateBasket: (basket: []) => set(() => ({ basket: basket })),
+  updateBasket: (basket: { title: string; amount: number; price: number }[]) =>
+    set((state) => ({ ...state, basket: basket })),
 }));

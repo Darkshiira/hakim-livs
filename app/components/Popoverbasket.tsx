@@ -2,34 +2,32 @@ import { Popover } from "@headlessui/react";
 import { useItemStore } from "../zustand/zustandStore";
 import Link from "next/link";
 
-type Basket = { [key: string]: number };
+type Basket = { title: string; amount: number; price: number }[];
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
-  function isBasket(obj: any): obj is Basket {
-    return typeof obj === "object" && !Array.isArray(obj) && obj !== null;
-  }
   return (
     <>
-      {isBasket(basket) ? (
-        <Popover className="relative ">
-          <Popover.Button>Varukorg</Popover.Button>
-          <Popover.Panel className="absolute right-0  z-10 bg-blue-200 w-60 text-center">
-            <div className="grid grid-cols-1">
-              {Object.keys(basket).map((key: string) => (
-                <div
-                  key={key}
-                  className="grid grid-cols-2 gap-6 m-3 bg-slate-200"
-                >
-                  <p>{key}</p>
-                  <p>{basket[key]}</p>
-                </div>
-              ))}
+      <Popover className="relative z-50 ">
+        <Popover.Button>Varukorg</Popover.Button>
+        <Popover.Panel className="absolute right-0  z-10 bg-blue-200 w-60 text-center">
+          <div className="grid grid-cols-1">
+            <div className="grid grid-cols-3 font-bold">
+              <p className="text-left">Produkt</p>
+              <p className="text-center">Antal</p>
+              <p className="text-right">Pris</p>
             </div>
-            <Link href="/checkout"> Till kassan</Link>
-          </Popover.Panel>
-        </Popover>
-      ) : null}
+            {basket.map((item) => (
+              <div key={item.title} className="grid grid-cols-3">
+                <p className="text-left">{item.title}</p>
+                <p className="text-center">{item.amount}</p>
+                <p className="text-right">{item.price}</p>
+              </div>
+            ))}
+          </div>
+          <Link href="/checkout"> Till kassan</Link>
+        </Popover.Panel>
+      </Popover>
     </>
   );
 }
