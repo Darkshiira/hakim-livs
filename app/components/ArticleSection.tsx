@@ -7,12 +7,19 @@ import { useItemStore } from "../zustand/zustandStore";
 
 interface ProductData {
   id: string;
+  storeId: string;
   title: string;
-  manufacturer: string;
-  size: string;
+  description: string;
+  ingredients: string;
   price: number;
   image: string;
+  manufacturer: string;
   category: string;
+  size: string;
+  color: string;
+  isfeatured: boolean;
+  stock: number;
+  isarchived: boolean;
 }
 
 const ArticleSection: React.FC = () => {
@@ -22,23 +29,33 @@ const ArticleSection: React.FC = () => {
 
   useEffect(() => {
     axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/products`)
+      .get(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products`
+      ) //TODO FIXA RÄTT STOREID
       .then(function (response) {
-        if (category === "") {
-          setProducts(response.data);
+        if (category === "Alla" || category === "") {
+          const sortproducts = response.data.sort(
+            (a: ProductData, b: ProductData) =>
+              Number(b.isfeatured) - Number(a.isfeatured)
+          );
+          setProducts(sortproducts);
+
           return;
         } else {
           const filterdproducts = response.data.filter(
             (product: ProductData) => product.category === category
           );
-          setProducts(filterdproducts);
+          const sortproducts = filterdproducts.sort(
+            (a: ProductData, b: ProductData) =>
+              Number(b.isfeatured) - Number(a.isfeatured)
+          );
+          setProducts(sortproducts);
         }
       })
       .catch(function (error) {
         console.log(error);
       });
   }, [category]);
-
   return (
     <>
       <section className="p-4 bg-blue-200">
@@ -59,6 +76,15 @@ const ArticleSection: React.FC = () => {
               size={product.size}
               price={product.price}
               image={product.image}
+              isfeatured={product.isfeatured}
+              stock={product.stock}
+              ingredients={product.ingredients}
+              description={product.description}
+              category={product.category}
+              color={product.color}
+              id={product.id}
+              storeId={product.storeId}
+              isarchived={product.isarchived}
             />
           ))}
         </div>
