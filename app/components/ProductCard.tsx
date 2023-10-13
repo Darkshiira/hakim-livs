@@ -76,7 +76,7 @@ const Productcard: FC<ProductCardProps> = ({
     }
     updateBasket([
       ...basket,
-      { title: title, amount: amount, price: price * amount },
+      { title: title, amount: amount, price: price * amount, image: image, size: size },
     ]);
     setAmount(1);
     toast.success("Added to cart!");
