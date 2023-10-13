@@ -1,6 +1,6 @@
 "use client";
 import { Menu } from "@headlessui/react";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 
 // Dropdown menyn som visar de olika kategorierna i aside på första sidan
 // TODO: Ändra så länkarna går till rätt produkter

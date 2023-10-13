@@ -3,7 +3,7 @@
 import Productcard from "./ProductCard";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 
 interface ProductData {
   id: string;

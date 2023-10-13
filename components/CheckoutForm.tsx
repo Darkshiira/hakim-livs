@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
-import { Basket } from "./BasketType";
+import { Basket } from "@/components/BasketType";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/

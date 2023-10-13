@@ -1,7 +1,7 @@
 "use client";
 
 import Dropdown from "./Dropdown";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 import axios from "axios";
 import { useEffect } from "react";
 

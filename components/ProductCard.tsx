@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { FC, CSSProperties } from "react";
 import { useState } from "react";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 import toast, { Toaster } from "react-hot-toast";
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
@@ -76,7 +76,13 @@ const Productcard: FC<ProductCardProps> = ({
     }
     updateBasket([
       ...basket,
-      { title: title, amount: amount, price: price * amount, image: image, size: size },
+      {
+        title: title,
+        amount: amount,
+        price: price * amount,
+        image: image,
+        size: size,
+      },
     ]);
     setAmount(1);
     toast.success("Added to cart!");

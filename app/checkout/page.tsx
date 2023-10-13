@@ -2,7 +2,7 @@
 import React from "react";
 import Image from "next/image";
 import { useItemStore } from "../zustand/zustandStore";
-import { CheckoutForm } from "../components/CheckoutForm";
+import { CheckoutForm } from "../../components/CheckoutForm";
 
 const CheckoutPage = () => {
   const basket = useItemStore((state) => state.basket);
