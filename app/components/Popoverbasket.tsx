@@ -1,7 +1,7 @@
 import { Popover } from "@headlessui/react";
 import { useItemStore } from "../zustand/zustandStore";
 import Link from "next/link";
-import toast, { Toaster } from 'react-hot-toast';
+import toast, { Toaster } from "react-hot-toast";
 
 type Basket = { title: string; amount: number; price: number }[];
 
@@ -58,18 +58,18 @@ export default function MyPopover() {
                 <div className="grid grid-cols-3">
                   <button
                     onClick={(e) => {
-                      increaseAmount(item.title);
-                    }}
-                  >
-                    +
-                  </button>
-                  <p className="text-center">{item.amount}</p>
-                  <button
-                    onClick={(e) => {
                       decreaseAmount(item.title);
                     }}
                   >
                     -
+                  </button>
+                  <p className="text-center">{item.amount}</p>
+                  <button
+                    onClick={(e) => {
+                      increaseAmount(item.title);
+                    }}
+                  >
+                    +
                   </button>
                 </div>
                 <p className="text-right">{item.price}</p>
