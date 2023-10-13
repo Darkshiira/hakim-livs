@@ -2,7 +2,7 @@ import { Popover } from "@headlessui/react";
 import { useItemStore } from "../app/zustand/zustandStore";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
-import { Basket } from "./BasketType";
+import { Basket } from "@/components/BasketType";
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
