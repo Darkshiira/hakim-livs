@@ -28,9 +28,10 @@ const ArticleSection: React.FC = () => {
   const [products, setProducts] = useState<ProductData[]>([]);
 
   useEffect(() => {
+    const id = "active";
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products/active`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products/${id}`
       ) //TODO FIXA RÄTT STOREID
       .then(function (response) {
         if (category === "Alla" || category === "") {
