@@ -21,6 +21,9 @@ const CheckoutPage = () => {
           <div className="w-1/2 space-y-8">
             <h1 className="text-2xl">Checkout</h1>
             {CheckoutForm(basket, subtotal)}
+            <h1>Betalning:</h1>
+            <p>Swisha nummer: 073 777 777 7</p>
+            <p>Eller betala kontant vid leverans</p>
           </div>
 
           <div className="w-1/2 space-y-4 border-l pl-12">

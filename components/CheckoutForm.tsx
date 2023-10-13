@@ -55,7 +55,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         { sendingData }
       )
       .then(function (response) {
-        toast.success("Tack för din beställning!");
+        toast.success("Tack för din beställning, glöm inte att betala!");
         setInterval(() => {
           window.location.href = "/";
         }, 2000);
