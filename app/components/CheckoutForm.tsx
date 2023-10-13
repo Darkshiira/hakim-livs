@@ -94,7 +94,6 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         />
         <FormField
           control={form.control}
-          type="email"
           name="email"
           render={({ field }) => (
             <FormItem>
