@@ -82,6 +82,7 @@ const Productcard: FC<ProductCardProps> = ({
         price: price * amount,
         image: image,
         size: size,
+        id: id,
       },
     ]);
     setAmount(1);

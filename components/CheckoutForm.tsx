@@ -50,6 +50,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         title: item.title,
         amount: item.amount,
         price: item.price,
+        id: item.id,
       };
     });
 

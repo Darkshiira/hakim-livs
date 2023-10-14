@@ -11,6 +11,7 @@ type State = {
     price: number;
     image: string;
     size: string;
+    id: string;
   }[];
 };
 type Action = {
@@ -35,6 +36,7 @@ export const useItemStore = create<State & Action>((set) => ({
       price: number;
       image: string;
       size: string;
+      id: string;
     }[]
   ) => set((state) => ({ ...state, basket: basket })),
 }));

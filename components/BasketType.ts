@@ -5,4 +5,5 @@ export type Basket = {
   image: string;
   size: string;
   color?: string;
+  id: string;
 }[];
