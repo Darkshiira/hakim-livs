@@ -26,6 +26,7 @@ const ArticleSection: React.FC = () => {
   //To get the category from zustand
   const category = useItemStore((state) => state.category);
   const [products, setProducts] = useState<ProductData[]>([]);
+  const search = useItemStore((state) => state.search);
 
   useEffect(() => {
     const id = "active";
@@ -34,6 +35,25 @@ const ArticleSection: React.FC = () => {
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products/${id}`
       ) //TODO FIXA RÄTT STOREID
       .then(function (response) {
+        if (search !== "") {
+          const filterdproducts = response.data.filter(
+            (product: ProductData) =>
+              product.title.toLowerCase().includes(search.toLowerCase()) ||
+              product.manufacturer.toLowerCase().includes(search.toLowerCase())
+          );
+          const sortproducts = filterdproducts.sort(
+            (a: ProductData, b: ProductData) =>
+              Number(b.isfeatured) - Number(a.isfeatured)
+          );
+          const stockedproducts = sortproducts.filter(
+            (product: ProductData) => {
+              return product.stock > 0;
+            }
+          );
+          setProducts(stockedproducts);
+          return;
+        }
+
         if (category === "Alla" || category === "") {
           const sortproducts = response.data.sort(
             (a: ProductData, b: ProductData) =>
@@ -66,7 +86,7 @@ const ArticleSection: React.FC = () => {
       .catch(function (error) {
         console.log(error);
       });
-  }, [category]);
+  }, [category, search]);
   return (
     <>
       <section className="p-4 bg-blue-200">
@@ -75,6 +95,9 @@ const ArticleSection: React.FC = () => {
             type="text"
             placeholder="Sök artikel"
             className="border rounded-full w-80 p-2 m-4"
+            onChange={(e) => {
+              useItemStore.setState({ search: e.target.value });
+            }}
           />
           <button className="hover:text-blue-500">Sök</button>
         </div>

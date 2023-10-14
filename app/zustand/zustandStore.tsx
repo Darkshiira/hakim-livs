@@ -14,12 +14,14 @@ type State = {
     id: string;
     stock: number;
   }[];
+  search: string;
 };
 type Action = {
   updateItems: (items: State["items"]) => void;
   updateUpdate: (update: State["update"]) => void;
   updateCategory: (category: State["category"]) => void;
   updateBasket: (basket: State["basket"]) => void;
+  updateSearch: (search: State["search"]) => void;
 };
 
 export const useItemStore = create<State & Action>((set) => ({
@@ -41,4 +43,6 @@ export const useItemStore = create<State & Action>((set) => ({
       stock: number;
     }[]
   ) => set((state) => ({ ...state, basket: basket })),
+  search: "",
+  updateSearch: (search: string) => set(() => ({ search: search })),
 }));
