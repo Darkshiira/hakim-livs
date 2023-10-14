@@ -77,10 +77,13 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: "",
+      firstname: "",
+      lastname: "",
       email: "",
       phone: "",
-      address: "",
+      street: "",
+      zipCode: "",
+      city: "",
     },
   });
 
