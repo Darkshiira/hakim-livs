@@ -51,6 +51,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         amount: item.amount,
         price: item.price,
         id: item.id,
+        stock: item.stock,
       };
     });
 

@@ -83,6 +83,7 @@ const Productcard: FC<ProductCardProps> = ({
         image: image,
         size: size,
         id: id,
+        stock: stock,
       },
     ]);
     setAmount(1);

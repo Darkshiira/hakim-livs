@@ -6,4 +6,5 @@ export type Basket = {
   size: string;
   color?: string;
   id: string;
+  stock: number;
 }[];
