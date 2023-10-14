@@ -22,15 +22,24 @@ const phoneRegex = new RegExp(
 );
 
 const formSchema = z.object({
-  name: z.string().min(2, {
+  firstname: z.string().min(2, {
     message: "You must fill in your name",
+  }),
+  lastname: z.string().min(2, {
+    message: "You must fill in your last name",
   }),
   email: z.string().email({
     message: "You must fill in your email",
   }),
   phone: z.string().regex(phoneRegex, "Invalid Number!"),
-  address: z.string().min(5, {
+  street: z.string().min(5, {
     message: "You must fill in your address",
+  }),
+  zipCode: z.string().min(5, {
+    message: "You must fill in your zip code",
+  }),
+  city: z.string().min(2, {
+    message: "You must fill in your city",
   }),
 });
 
@@ -80,12 +89,26 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-8">
         <FormField
           control={form.control}
-          name="name"
+          name="firstname"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>För- och Efternamn</FormLabel>
+              <FormLabel>Ditt förnamn:</FormLabel>
               <FormControl>
-                <Input placeholder="Name.." {...field} />
+                <Input placeholder="Surname.." {...field} />
+              </FormControl>
+              <FormDescription></FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lastname"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Ditt efternamn:</FormLabel>
+              <FormControl>
+                <Input placeholder="Lastname..." {...field} />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />
@@ -122,12 +145,40 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         />
         <FormField
           control={form.control}
-          name="address"
+          name="street"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Din adress:</FormLabel>
+              <FormLabel>Din gatuadress:</FormLabel>
               <FormControl>
-                <Input placeholder="Address..." {...field} />
+                <Input placeholder="Street..." {...field} />
+              </FormControl>
+              <FormDescription></FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="zipCode"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Ditt postnummer:</FormLabel>
+              <FormControl>
+                <Input placeholder="ZipCode..." {...field} />
+              </FormControl>
+              <FormDescription></FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="city"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Din stad:</FormLabel>
+              <FormControl>
+                <Input placeholder="City..." {...field} />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />

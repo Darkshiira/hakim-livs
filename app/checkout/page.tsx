@@ -21,9 +21,6 @@ const CheckoutPage = () => {
           <div className="w-1/2 space-y-8">
             <h1 className="text-2xl">Checkout</h1>
             {CheckoutForm(basket, subtotal)}
-            <h1>Betalning:</h1>
-            <p>Swisha nummer: 073 777 777 7</p>
-            <p>Eller betala kontant vid leverans</p>
           </div>
 
           <div className="w-1/2 space-y-4 border-l pl-12">
@@ -47,6 +44,12 @@ const CheckoutPage = () => {
               <p className="text-right">Subtotal:{subtotal} Sek</p>
               <p className="text-right">Shipping: 50 Sek</p>
               <p className="text-right font-bold">Total: {subtotal + 50} Sek</p>
+            </div>
+            <div className={"border w-98"}></div>
+            <div className="text-center ">
+              <h1>Betalning:</h1>
+              <p>Swisha nummer: 073 777 777 7</p>
+              <p>Eller betala kontant vid leverans.</p>
             </div>
           </div>
         </div>
