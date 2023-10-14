@@ -106,7 +106,14 @@ const Productcard: FC<ProductCardProps> = ({
           <p>|</p>
           <p className="product-size">{size}</p>
         </div>
-        <h2 className="text-center">{price * amount}:-</h2>
+        <h2 className="text-center">
+          {(price * amount).toString().slice(0, -6) +
+            " " +
+            (price * amount).toString().slice(-6, -3) +
+            " " +
+            (price * amount).toString().slice(-3)}
+          :-
+        </h2>
         <div className="amountAndPurchase flex bg-green-100 justify-between p-2 items-center">
           <div className="flex w-20 justify-between">
             <button

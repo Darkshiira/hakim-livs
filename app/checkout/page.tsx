@@ -35,15 +35,36 @@ const CheckoutPage = () => {
                   <p className="ml-4">{item.title}</p>
                 </div>
                 <p>
-                  {item.amount}
-                  {item.size} : {item.price}Sek
+                  {item.amount} a {item.size} :{" "}
+                  {item.price.toString().slice(0, -6) +
+                    " " +
+                    item.price.toString().slice(-6, -3) +
+                    " " +
+                    item.price.toString().slice(-3)}
+                  Sek
                 </p>
               </div>
             ))}
             <div>
-              <p className="text-right">Subtotal:{subtotal} Sek</p>
+              <p className="text-right">
+                Subtotal:
+                {subtotal.toString().slice(0, -6) +
+                  " " +
+                  subtotal.toString().slice(-6, -3) +
+                  " " +
+                  subtotal.toString().slice(-3)}{" "}
+                Sek
+              </p>
               <p className="text-right">Shipping: 50 Sek</p>
-              <p className="text-right font-bold">Total: {subtotal + 50} Sek</p>
+              <p className="text-right font-bold">
+                Total:{" "}
+                {(subtotal + 50).toString().slice(0, -6) +
+                  " " +
+                  (subtotal + 50).toString().slice(-6, -3) +
+                  " " +
+                  (subtotal + 50).toString().slice(-3)}{" "}
+                Sek
+              </p>
             </div>
             <div className={"border w-98"}></div>
             <div className="text-center ">
