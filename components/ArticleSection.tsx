@@ -39,7 +39,12 @@ const ArticleSection: React.FC = () => {
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          setProducts(sortproducts);
+          const stockedproducts = sortproducts.filter(
+            (product: ProductData) => {
+              return product.stock > 0;
+            }
+          );
+          setProducts(stockedproducts);
 
           return;
         } else {
@@ -50,7 +55,12 @@ const ArticleSection: React.FC = () => {
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          setProducts(sortproducts);
+          const stockedproducts = sortproducts.filter(
+            (product: ProductData) => {
+              return product.stock > 0;
+            }
+          );
+          setProducts(stockedproducts);
         }
       })
       .catch(function (error) {

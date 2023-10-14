@@ -2,7 +2,6 @@
 import Link from "next/link";
 import MyPopover from "./Popoverbasket";
 import { Toaster } from "react-hot-toast";
-import { Basket } from "@/components/BasketType";
 // Navbaren högst upp på första sidan
 // TODO: Fixa funktionalitet på login och varukorg
 
