@@ -1,8 +1,8 @@
-import { Popover } from "@headlessui/react";
-import { useItemStore } from "../app/zustand/zustandStore";
-import Link from "next/link";
-import toast, { Toaster } from "react-hot-toast";
-import { Basket } from "@/components/BasketType";
+import { Popover } from '@headlessui/react';
+import { useItemStore } from '../app/zustand/zustandStore';
+import Link from 'next/link';
+import toast, { Toaster } from 'react-hot-toast';
+import { Basket } from '@/components/BasketType';
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
@@ -44,8 +44,8 @@ export default function MyPopover() {
     <>
       <Popover className="relative z-50 ">
         <Popover.Button>Varukorg</Popover.Button>
-        <Popover.Panel className="absolute right-0  z-10 bg-blue-200 w-60 text-center">
-          <div className="grid grid-cols-1">
+        <Popover.Panel className="absolute right-0  z-10 bg-white w-80 rounded-md text-center p-2 border border-black">
+          <div className="grid grid-cols-1 mb-2">
             <div className="grid grid-cols-3 font-bold">
               <p className="text-left">Produkt</p>
               <p className="text-center">Antal</p>
@@ -75,7 +75,10 @@ export default function MyPopover() {
               </div>
             ))}
           </div>
-          <Link href="/checkout"> Till kassan</Link>
+          <Link href="/checkout" className="bg-green-400 text-black hover:text-white p-1 px-4 rounded-md">
+            {' '}
+            Till kassan
+          </Link>
         </Popover.Panel>
       </Popover>
     </>
