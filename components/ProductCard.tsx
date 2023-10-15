@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { FC, CSSProperties } from "react";
-import { useState } from "react";
-import { useItemStore } from "../app/zustand/zustandStore";
-import toast, { Toaster } from "react-hot-toast";
+import Image from 'next/image';
+import { FC, CSSProperties } from 'react';
+import { useState } from 'react';
+import { useItemStore } from '../app/zustand/zustandStore';
+import toast, { Toaster } from 'react-hot-toast';
+import BigProductCard from './BigProductCard';
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
 // TODO: lägg till funktion på knapparna
@@ -27,8 +28,8 @@ interface ProductCardProps {
 }
 
 const imageStyle: CSSProperties = {
-  objectFit: "cover",
-  border: "1px solid #fff",
+  objectFit: 'cover',
+  border: '1px solid #fff',
 };
 
 const Productcard: FC<ProductCardProps> = ({
@@ -65,7 +66,7 @@ const Productcard: FC<ProductCardProps> = ({
 
   const buyStuffz = (title: string) => {
     if (amount === 0) {
-      console.log("You need to buy at least one item");
+      console.log('You need to buy at least one item');
     }
     if (basket.some((item) => item.title === title)) {
       const index = basket.findIndex((item) => item.title === title);
@@ -87,14 +88,14 @@ const Productcard: FC<ProductCardProps> = ({
       },
     ]);
     setAmount(1);
-    toast.success("Added to cart!");
+    toast.success('Added to cart!');
   };
   return (
     <>
       <div className="w-52 h-auto bg-red-200 p-2 relative">
         {isfeatured === true ? (
-          <div className={"absolute z-50"}>
-            <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
+          <div className={'absolute z-20'}>
+            <p className={'bg-red-800 text-white rotate-6 '}>Featured</p>
           </div>
         ) : null}
         <div className="bg-yellow-900 p-24 relative">
@@ -108,32 +109,33 @@ const Productcard: FC<ProductCardProps> = ({
         </div>
         <h2 className="text-center">
           {(price * amount).toString().slice(0, -6) +
-            " " +
+            ' ' +
             (price * amount).toString().slice(-6, -3) +
-            " " +
+            ' ' +
             (price * amount).toString().slice(-3)}
           :-
         </h2>
+        <BigProductCard
+          image={image}
+          title={title}
+          manufacturer={manufacturer}
+          size={size}
+          price={price}
+          description={description}
+          ingredients={ingredients}
+        />
+
         <div className="amountAndPurchase flex bg-green-100 justify-between p-2 items-center">
           <div className="flex w-20 justify-between">
-            <button
-              className="decreaseAmount w-full bg-blue-200"
-              onClick={minusOne}
-            >
+            <button className="decreaseAmount w-full bg-blue-200" onClick={minusOne}>
               -
             </button>
             <p className="amount">{amount}</p>
-            <button
-              className="increaseAmount w-full bg-blue-200"
-              onClick={plusOne}
-            >
+            <button className="increaseAmount w-full bg-blue-200" onClick={plusOne}>
               +
             </button>
           </div>
-          <button
-            className="purchaseButton p-1 w-20 bg-blue-200 rounded-md"
-            onClick={() => buyStuffz(title)}
-          >
+          <button className="purchaseButton p-1 w-20 bg-blue-200 rounded-md" onClick={() => buyStuffz(title)}>
             KÖP
           </button>
         </div>
