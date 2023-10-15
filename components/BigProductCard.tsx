@@ -21,18 +21,18 @@ const BigProductCard = (props: any) => {
             <div className="flex ">
               <Image src={props.image} alt="product" width={800} height={600} style={imageStyle}></Image>
               <div className="flex flex-col justify-evenly bg-red-300 p-2 w-full">
-                <h1 className="font-bold text-2xl text-center">{props.title}</h1>
+                <h1 className="font-extrabold text-4xl text-center">{props.title}</h1>
                 <div className="flex bg-blue-400 justify-evenly">
                   <p>{props.manufacturer}</p>|<p>{props.size}</p>
                 </div>
-                <h2 className="text-center text-xl">{props.price}:-</h2>
-                <div className="flex justify-evenly text-xl bg-blue-400 ">
-                  <button>-</button>
-                  <p>0</p>
-                  <button>+</button>
-                </div>
-                <div className="w-full flex justify-center">
-                  <button className="p-1 w-20 bg-blue-200 rounded-md ">KÖP</button>
+                <h2 className="text-center text-5xl font-extrabold">{props.price}:-</h2>
+                <div className="flex justify-evenly">
+                  <div className="flex justify-evenly text-xl bg-blue-400 border border-black w-32">
+                    <button className="w-full">-</button>
+                    <p>0</p>
+                    <button className="w-full">+</button>
+                  </div>
+                  <button className="p-1 w-20 bg-green-500 rounded-md hover:text-white w-32">KÖP</button>
                 </div>
               </div>
             </div>
