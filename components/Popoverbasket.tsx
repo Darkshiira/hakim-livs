@@ -1,9 +1,8 @@
 import { Popover } from "@headlessui/react";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
-
-type Basket = { title: string; amount: number; price: number }[];
+import { Basket } from "@/components/BasketType";
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);

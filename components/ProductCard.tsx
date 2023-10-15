@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { FC, CSSProperties } from "react";
 import { useState } from "react";
-import { useItemStore } from "../zustand/zustandStore";
+import { useItemStore } from "../app/zustand/zustandStore";
 import toast, { Toaster } from "react-hot-toast";
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
@@ -76,7 +76,15 @@ const Productcard: FC<ProductCardProps> = ({
     }
     updateBasket([
       ...basket,
-      { title: title, amount: amount, price: price * amount },
+      {
+        title: title,
+        amount: amount,
+        price: price * amount,
+        image: image,
+        size: size,
+        id: id,
+        stock: stock,
+      },
     ]);
     setAmount(1);
     toast.success("Added to cart!");
@@ -98,7 +106,14 @@ const Productcard: FC<ProductCardProps> = ({
           <p>|</p>
           <p className="product-size">{size}</p>
         </div>
-        <h2 className="text-center">{price * amount}:-</h2>
+        <h2 className="text-center">
+          {(price * amount).toString().slice(0, -6) +
+            " " +
+            (price * amount).toString().slice(-6, -3) +
+            " " +
+            (price * amount).toString().slice(-3)}
+          :-
+        </h2>
         <div className="amountAndPurchase flex bg-green-100 justify-between p-2 items-center">
           <div className="flex w-20 justify-between">
             <button
