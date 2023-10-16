@@ -19,7 +19,7 @@ function Dropdown({ props = {} }: { props?: any }) {
     <section className="flex flex-col">
       <Menu>
         <Menu.Button className="text-left font-bold" onClick={sendCategory}>
-          {props}
+          {props.toUpperCase()}
         </Menu.Button>
         <Menu.Items className="flex flex-col">
           {/* <Menu.Item>

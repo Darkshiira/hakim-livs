@@ -18,7 +18,6 @@ const Hero = () => {
         setBillboardurl(res.data.image);
         setBillboardTitle(res.data.text);
         setBanner(true);
-
       })
       .catch((err) => {
         console.log(err);
@@ -26,18 +25,19 @@ const Hero = () => {
   }, []);
 
   return (
-    <section> 
-      {banner ?
-      <div className="hero bg-black text-red-400 h-80 flex w-full content-center justify-center items-center overflow-hidden ">
-        <Image src={billboardurl} alt="food" width="1600" height="208" />
-        <p className="absolute bg-transparent text-white text-6xl z-20">
-          {billboardTitle}
-        </p>
-      </div>
-      : (
-      <div className="hero bg-black text-red-400 h-80 flex w-full content-center justify-center items-center overflow-hidden ">
-        <p>Reklam kommer snart!</p>
-      </div>)} 
+    <section>
+      {banner ? (
+        <div className="hero bg-black h-80 flex content-center justify-center items-center overflow-hidden ">
+          <Image src={billboardurl} alt="food" width="1800" height="208" />
+          <p className="absolute bg-transparent text-white text-6xl z-20">
+            {billboardTitle}
+          </p>
+        </div>
+      ) : (
+        <div className="hero bg-black text-red-400 h-80 flex w-full content-center justify-center items-center overflow-hidden ">
+          <p>Reklam kommer snart!</p>
+        </div>
+      )}
     </section>
   );
 };
