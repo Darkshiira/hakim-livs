@@ -1,4 +1,4 @@
-import { create } from "zustand";
+import { create } from 'zustand';
 
 // Zustand store to keep track of the items in the category dropdown
 type State = {
@@ -17,11 +17,12 @@ type State = {
   search: string;
 };
 type Action = {
-  updateItems: (items: State["items"]) => void;
-  updateUpdate: (update: State["update"]) => void;
-  updateCategory: (category: State["category"]) => void;
-  updateBasket: (basket: State["basket"]) => void;
-  updateSearch: (search: State["search"]) => void;
+  updateItems: (items: State['items']) => void;
+  updateUpdate: (update: State['update']) => void;
+  updateCategory: (category: State['category']) => void;
+  updateBasket: (basket: State['basket']) => void;
+  updateSearch: (search: State['search']) => void;
+  clearBasket: () => void;
 };
 
 export const useItemStore = create<State & Action>((set) => ({
@@ -29,7 +30,7 @@ export const useItemStore = create<State & Action>((set) => ({
   updateItems: (items: Map<string, string>) => set(() => ({ items: items })),
   update: false,
   updateUpdate: (update: boolean) => set(() => ({ update: update })),
-  category: "",
+  category: '',
   updateCategory: (category: string) => set(() => ({ category: category })),
   basket: [],
   updateBasket: (
@@ -43,6 +44,7 @@ export const useItemStore = create<State & Action>((set) => ({
       stock: number;
     }[]
   ) => set((state) => ({ ...state, basket: basket })),
-  search: "",
+  search: '',
   updateSearch: (search: string) => set(() => ({ search: search })),
+  clearBasket: () => set((state) => ({ ...state, basket: [] })),
 }));
