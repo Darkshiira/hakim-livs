@@ -12,7 +12,7 @@ const Nav = () => {
   const updateReload = useItemStore((state) => state.updateReload);
   return (
     <>
-      <nav className="p-4 w-full bg-green-200 flex justify-between items-center fixed z-50">
+      <nav className="p-4 w-full bg-slate-400 flex justify-between items-center fixed z-50">
         <Link
           href="/"
           className="text-xl"

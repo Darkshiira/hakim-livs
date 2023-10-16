@@ -36,14 +36,16 @@ const CategoryAside = () => {
 
   return (
     <>
-      <div className="p-4 bg-slate-100 w-52">
-        <h2 className="text-center font-bold text-lg">Kategorier</h2>
-        <Dropdown props={"Alla"} />
-        {update
-          ? Array.from(itemsitr).map(([key, value]) => (
-              <Dropdown props={value} key={key} />
-            ))
-          : null}
+      <div className="p-4 bg-slate-200 w-52 relative">
+        <div className="sticky top-24">
+          <h2 className="text-center font-bold text-lg">Kategorier</h2>
+          <Dropdown props={"Alla"} />
+          {update
+            ? Array.from(itemsitr).map(([key, value]) => (
+                <Dropdown props={value} key={key} />
+              ))
+            : null}
+        </div>
       </div>
     </>
   );
