@@ -1,12 +1,11 @@
 import { Popover } from '@headlessui/react';
 import { useItemStore } from '../app/zustand/zustandStore';
 import Link from 'next/link';
-import toast, { Toaster } from 'react-hot-toast';
-import { Basket } from '@/components/BasketType';
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
+  const clearBasket = useItemStore((state) => state.clearBasket);
 
   const increaseAmount = (title: string) => {
     const newBasket = basket.map((item) => {
@@ -75,10 +74,14 @@ export default function MyPopover() {
               </div>
             ))}
           </div>
-          <Link href="/checkout" className="bg-green-400 text-black hover:text-white p-1 px-4 rounded-md">
-            {' '}
-            Till kassan
-          </Link>
+          <div className="flex justify-evenly">
+            <Popover.Button onClick={clearBasket} className="bg-red-600 hover:text-white w-24 rounded-md">
+              Töm
+            </Popover.Button>
+            <Link href="/checkout" className="bg-green-400 hover:text-white p-1 px-4 rounded-md">
+              Till kassan
+            </Link>
+          </div>
         </Popover.Panel>
       </Popover>
     </>
