@@ -28,8 +28,10 @@ const Hero = () => {
     <section>
       {banner ? (
         <div className="hero bg-green-200 flex content-center justify-center items-center overflow-hidden ">
-          <Image src={billboardurl} alt="food" width="1800" height="208" />
-          <p className="absolute bg-transparent text-white text-6xl z-20">
+          <div className="w-[1800px] h-[228px]">
+            <Image src={billboardurl} alt="food" width="1800" height="228" />
+          </div>
+          <p className="absolute mt-10 bg-transparent text-white text-6xl z-20">
             {billboardTitle}
           </p>
         </div>
