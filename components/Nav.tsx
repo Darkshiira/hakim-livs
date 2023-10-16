@@ -1,18 +1,22 @@
-"use client";
-import Link from "next/link";
-import MyPopover from "./Popoverbasket";
-import { Toaster } from "react-hot-toast";
+'use client';
+import Link from 'next/link';
+import MyPopover from './Popoverbasket';
+import { Toaster } from 'react-hot-toast';
+import { AiOutlineUser } from 'react-icons/ai';
 // Navbaren högst upp på första sidan
-// TODO: Fixa funktionalitet på login och varukorg
+// TODO: Fixa funktionalitet på login
 
 const Nav = () => {
   return (
     <>
-      <nav className="p-4 w-full bg-green-200 flex justify-between fixed z-50">
-        <Link href="/">Hakim Livs</Link>
+      <nav className="p-4 w-full bg-green-200 flex justify-between items-center fixed z-50">
+        <Link href="/" className="text-xl">
+          Hakim Livs
+        </Link>
         <div className="flex space-x-6">
-          <Link href="/" className="hover:text-blue-500">
-            Logga in
+          <Link href="/" className="hover:text-blue-500 flex flex-col items-center">
+            <AiOutlineUser className="text-3xl" />
+            <p>Logga in</p>
           </Link>
           <div>
             <Toaster />
