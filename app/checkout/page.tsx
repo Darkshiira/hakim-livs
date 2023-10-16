@@ -11,10 +11,9 @@ const CheckoutPage = () => {
   return (
     <>
       {basket.length === 0 ? (
-        <div className="p-48">
+        <div className="p-48 bg-white">
           <h1 className="text-2xl">Checkout</h1>
           <p>Din varukorg är tom</p>
-          <p>Vi omdirigerar dig tillbaka till butiken...</p>
         </div>
       ) : (
         <div className="p-24 flex flex-row justify-around border">

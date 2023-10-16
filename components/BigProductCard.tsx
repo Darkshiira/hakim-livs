@@ -100,7 +100,7 @@ const BigProductCard = (props: any) => {
                     </button>
                   </div>
                   <Popover.Button
-                    className="p-1 w-20 bg-green-500 rounded-md hover:text-white w-32"
+                    className="p-1 bg-green-500 rounded-md hover:text-white w-32"
                     onClick={() => buy(props.price * amount)}
                   >
                     KÖP
