@@ -10,10 +10,22 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.17",
+    "@hookform/resolvers": "^3.3.2",
+    "@radix-ui/react-label": "^2.0.2",
+    "@radix-ui/react-slot": "^1.0.2",
     "axios": "^1.5.1",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.0.0",
+    "lucide-react": "^0.287.0",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-hook-form": "^7.47.0",
+    "react-hot-toast": "^2.4.1",
+    "react-icons": "^4.11.0",
+    "tailwind-merge": "^1.14.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.22.4",
     "zustand": "^4.4.1"
   },
   "devDependencies": {
