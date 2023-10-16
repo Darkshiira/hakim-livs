@@ -127,24 +127,24 @@ const Productcard: FC<ProductCardProps> = ({
           ingredients={ingredients}
         />
 
-        <div className="amountAndPurchase flex bg-green-100 justify-between p-2 items-center ">
+        <div className="amountAndPurchase flex bg-slate-200 justify-between p-2 items-center ">
           <div className="flex w-20 justify-between">
             <button
-              className="decreaseAmount w-full bg-blue-200"
+              className="decreaseAmount w-full bg-slate-400"
               onClick={minusOne}
             >
               -
             </button>
             <p className="amount">{amount}</p>
             <button
-              className="increaseAmount w-full bg-blue-200"
+              className="increaseAmount w-full bg-slate-400"
               onClick={plusOne}
             >
               +
             </button>
           </div>
           <button
-            className="purchaseButton p-1 w-20 bg-blue-200 rounded-md"
+            className="purchaseButton p-1 w-20 bg-slate-400 rounded-md"
             onClick={() => buyStuffz(title)}
           >
             KÖP
