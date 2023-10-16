@@ -22,10 +22,10 @@ const phoneRegex = new RegExp(
 );
 
 const formSchema = z.object({
-  firstname: z.string().min(2, {
+  firstName: z.string().min(2, {
     message: "You must fill in your name",
   }),
-  lastname: z.string().min(2, {
+  lastName: z.string().min(2, {
     message: "You must fill in your last name",
   }),
   email: z.string().email({
@@ -79,8 +79,8 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstname: "",
-      lastname: "",
+      firstName: "",
+      lastName: "",
       email: "",
       phone: "",
       street: "",
@@ -94,7 +94,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-8">
         <FormField
           control={form.control}
-          name="firstname"
+          name="firstName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Ditt förnamn:</FormLabel>
@@ -108,7 +108,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         />
         <FormField
           control={form.control}
-          name="lastname"
+          name="lastName"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Ditt efternamn:</FormLabel>
