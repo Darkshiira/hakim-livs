@@ -72,6 +72,7 @@ const Productcard: FC<ProductCardProps> = ({
       const index = basket.findIndex((item) => item.title === title);
       const newBasket = [...basket];
       newBasket[index].amount = newBasket[index].amount + amount;
+      newBasket[index].price = newBasket[index].price + price * amount;
       updateBasket(newBasket);
       setAmount(1);
       toast.success("Added to cart!");

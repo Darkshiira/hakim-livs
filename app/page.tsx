@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 
 export default function Home() {
   return (
-    <div className="bg-slate-800">
+    <div className="bg-green-200">
       <Nav />
       <Hero />
       <MainSection />;

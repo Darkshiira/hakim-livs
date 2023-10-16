@@ -3,5 +3,5 @@ export default function CheckoutLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <section className="bg-slate-600">{children}</section>;
+  return <section className="bg-slate-100">{children}</section>;
 }
