@@ -43,6 +43,11 @@ export default function MyPopover() {
     updateBasket(updatedBasket);
   };
 
+  const clearingBasket = () => {
+    clearBasket();
+    window.location.reload();
+  };
+
   return (
     <>
       <Popover className="relative z-50 ">
@@ -91,7 +96,9 @@ export default function MyPopover() {
           </div>
           <div className="flex justify-evenly">
             <Popover.Button
-              onClick={clearBasket}
+              onClick={() => {
+                clearingBasket();
+              }}
               className="bg-red-600 hover:text-white w-24 rounded-md"
             >
               Töm
