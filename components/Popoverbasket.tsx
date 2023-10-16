@@ -1,12 +1,13 @@
 import { Popover } from '@headlessui/react';
 import { useItemStore } from '../app/zustand/zustandStore';
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import Link from 'next/link';
-import toast, { Toaster } from 'react-hot-toast';
-import { Basket } from '@/components/BasketType';
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
+  const clearBasket = useItemStore((state) => state.clearBasket);
+  const totalItems = basket.reduce((total, item) => total + item.amount, 0);
 
   const increaseAmount = (title: string) => {
     const newBasket = basket.map((item) => {
@@ -43,7 +44,18 @@ export default function MyPopover() {
   return (
     <>
       <Popover className="relative z-50 ">
-        <Popover.Button>Varukorg</Popover.Button>
+        <Popover.Button className="relative">
+          <div className="flex flex-col items-center hover:text-blue-500">
+            <AiOutlineShoppingCart className="text-3xl" />
+            <p>Varukorg</p>
+          </div>
+        </Popover.Button>
+        <div
+          className="flex justify-center items-center right-0 top-0 absolute w-5 h-5 bg-purple-400 text-white text-xs rounded-full"
+          style={{ transform: 'translate(-20%, -40%)' }}
+        >
+          {totalItems}
+        </div>
         <Popover.Panel className="absolute right-0  z-10 bg-white w-80 rounded-md text-center p-2 border border-black">
           <div className="grid grid-cols-1 mb-2">
             <div className="grid grid-cols-3 font-bold">
@@ -75,10 +87,14 @@ export default function MyPopover() {
               </div>
             ))}
           </div>
-          <Link href="/checkout" className="bg-green-400 text-black hover:text-white p-1 px-4 rounded-md">
-            {' '}
-            Till kassan
-          </Link>
+          <div className="flex justify-evenly">
+            <Popover.Button onClick={clearBasket} className="bg-red-600 hover:text-white w-24 rounded-md">
+              Töm
+            </Popover.Button>
+            <Link href="/checkout" className="bg-green-400 hover:text-white p-1 px-4 rounded-md">
+              Till kassan
+            </Link>
+          </div>
         </Popover.Panel>
       </Popover>
     </>
