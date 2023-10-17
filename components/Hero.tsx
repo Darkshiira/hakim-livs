@@ -27,14 +27,16 @@ const Hero = () => {
   return (
     <section>
       {banner ? (
-        <div className="hero bg-black h-80 flex content-center justify-center items-center overflow-hidden ">
-          <Image src={billboardurl} alt="food" width="1800" height="208" />
-          <p className="absolute bg-transparent text-white text-6xl z-20">
+        <div className="hero bg-green-200 flex content-center justify-center items-center overflow-hidden ">
+          <div className="w-[1800px] h-[228px]">
+            <Image src={billboardurl} alt="food" width="1800" height="228" />
+          </div>
+          <p className="absolute mt-10 bg-transparent text-white text-6xl z-20">
             {billboardTitle}
           </p>
         </div>
       ) : (
-        <div className="hero bg-black text-red-400 h-80 flex w-full content-center justify-center items-center overflow-hidden ">
+        <div className="hero bg-black text-white-400 h-80 flex w-full content-center justify-center items-center overflow-hidden ">
           <p>Reklam kommer snart!</p>
         </div>
       )}

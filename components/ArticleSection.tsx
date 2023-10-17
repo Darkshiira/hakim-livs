@@ -80,7 +80,7 @@ const ArticleSection: React.FC = () => {
   }, [category, search]);
   return (
     <>
-      <section className="p-4 bg-blue-200">
+      <section className="p-4 bg-white">
         <div className="flex justify-center">
           <input
             type="text"

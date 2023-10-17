@@ -1,13 +1,29 @@
+
+import Image from "next/image";
 const Footer = () => {
   return (
-    <footer className="bg-white text-black h-40 flex items-center justify-between px-8 w-full">
-      <p></p>
-        
+    <footer className="bg-slate-400 text-black h-40 flex items-center justify-around pt-10 pb-10 w-full">
+      <div className="flex flex-row">
+        <Image
+          alt="Hakim"
+          src="https://cdn.discordapp.com/attachments/911706428576784395/1163565478158016542/image.png?ex=654009cb&is=652d94cb&hm=ce85bf5342c46318ecbade1c9f0f8f1f131b580b664d268621812279af3f148c&"
+          width="200"
+          height="200"
+          className="border-2 border-black rounded-full"
+        />
+        <div className="text-left pl-2 space-y-1">
+          <p className="underline text-2xl">Hakim Livs</p>
+          <p>Öppet: 10:00 - 22:00, varje dag!</p>
+          <p>Adress: Tomtebodavägen 3A, 171 65 Solna</p>
+          <a href="info@hakimlivs.se">info@hakimlivs.se</a>
+          <p>Telefon: 073-777 777 7</p>
+        </div>
+      </div>
       <div className="text-right space-y-1">
-        <p>Hakim Livs</p>
-        <p>Öppet: 10:00 - 22:00</p>
-        <p>Adress: Tomtebodavägen 3A, 171 65 Solna</p>
-        <p>Telefon: 073-482 33 48</p>
+        <p className="underline">
+          Betalning i online-shopen sker via Swish till: 073-777 777 7
+        </p>
+        <p>Eller kontant vid leverans </p>
       </div>
     </footer>
   );

@@ -1,5 +1,5 @@
-import ArticleSection from './ArticleSection';
-import CategoryAside from './CategoryAside';
+import ArticleSection from "./ArticleSection";
+import CategoryAside from "./CategoryAside";
 
 // Huvudinnehållet som är mellan navbar och footer på första sidan
 

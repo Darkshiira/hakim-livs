@@ -8,19 +8,23 @@ import { useItemStore } from "../app/zustand/zustandStore";
 // TODO: Fixa funktionalitet på login
 
 const Nav = () => {
-  const update = useItemStore((state) => state.update);
-  const updateUpdate = useItemStore((state) => state.updateUpdate);
+  const reload = useItemStore((state) => state.reload);
+  const updateReload = useItemStore((state) => state.updateReload);
   return (
     <>
-      <nav className="p-4 w-full bg-green-200 flex justify-between items-center fixed z-50">
-        <Link href="/" className="text-xl" onClick={() => updateUpdate(false)}>
+      <nav className="p-4 w-full bg-slate-400 flex justify-between items-center fixed z-50">
+        <Link
+          href="/"
+          className="text-xl"
+          onClick={() => updateReload(!reload)}
+        >
           Hakim Livs
         </Link>
         <div className="flex space-x-6">
           <Link
             href="/"
             className="hover:text-blue-500 flex flex-col items-center"
-            onClick={() => updateUpdate(false)}
+            onClick={() => updateReload(!reload)}
           >
             <AiOutlineUser className="text-3xl" />
             <p>Logga in</p>
