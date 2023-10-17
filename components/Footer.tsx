@@ -14,7 +14,7 @@ const Footer = () => {
           <p className="underline text-2xl">Hakim Livs</p>
           <p>Öppet: 10:00 - 22:00, varje dag!</p>
           <p>Adress: Tomtebodavägen 3A, 171 65 Solna</p>
-          <a href="hakimlivs@info.se">info@hakimlivs.se</a>
+          <a href="info@hakimlivs.se">info@hakimlivs.se</a>
           <p>Telefon: 073-777 777 7</p>
         </div>
       </div>
