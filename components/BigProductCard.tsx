@@ -66,7 +66,7 @@ const BigProductCard = (props: any) => {
     <>
       <Popover>
         <Popover.Button className="underline hover:text-blue-600">
-          Info
+          Info om produkten
         </Popover.Button>
 
         <Popover.Panel className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-3xl bg-white border rounded-lg shadow-md p-2 z-50">
@@ -79,18 +79,18 @@ const BigProductCard = (props: any) => {
                 height={600}
                 style={imageStyle}
               ></Image>
-              <div className="flex flex-col justify-evenly bg-red-300 p-2 w-full">
+              <div className="flex flex-col justify-evenly bg-white p-2 w-full">
                 <h1 className="font-extrabold text-4xl text-center">
                   {props.title}
                 </h1>
-                <div className="flex bg-blue-400 justify-evenly">
+                <div className="flex bg-white justify-evenly">
                   <p>{props.manufacturer}</p>|<p>{props.size}</p>
                 </div>
                 <h2 className="text-center text-5xl font-extrabold">
                   {props.price * amount}:-
                 </h2>
                 <div className="flex justify-evenly">
-                  <div className="flex justify-evenly text-xl bg-blue-400 border border-black w-32">
+                  <div className="flex justify-evenly text-xl bg-slate-200 border border-black w-32">
                     <button className="w-full" onClick={minusOne}>
                       -
                     </button>
@@ -108,11 +108,11 @@ const BigProductCard = (props: any) => {
                 </div>
               </div>
             </div>
-            <div className="bg-yellow-300">
+            <div className="bg-white">
               <h2 className="font-bold">Produktinformation</h2>
               <p>{props.description}</p>
             </div>
-            <div className="bg-blue-300">
+            <div className="bg-white">
               <h2 className="font-bold">Innehållsförteckning</h2>
               <p>{props.ingredients}</p>
             </div>
