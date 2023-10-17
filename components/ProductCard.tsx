@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { FC, CSSProperties } from "react";
-import { useState } from "react";
-import { useItemStore } from "../app/zustand/zustandStore";
-import toast, { Toaster } from "react-hot-toast";
-import BigProductCard from "./BigProductCard";
+import Image from 'next/image';
+import { FC, CSSProperties } from 'react';
+import { useState } from 'react';
+import { useItemStore } from '../app/zustand/zustandStore';
+import toast, { Toaster } from 'react-hot-toast';
+import BigProductCard from './BigProductCard';
 
 // Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
 // TODO: lägg till funktion på knapparna
@@ -28,8 +28,8 @@ interface ProductCardProps {
 }
 
 const imageStyle: CSSProperties = {
-  objectFit: "cover",
-  border: "1px solid #fff",
+  objectFit: 'cover',
+  border: '1px solid #fff',
 };
 
 const Productcard: FC<ProductCardProps> = ({
@@ -66,7 +66,7 @@ const Productcard: FC<ProductCardProps> = ({
 
   const buyStuffz = (title: string) => {
     if (amount === 0) {
-      console.log("You need to buy at least one item");
+      console.log('You need to buy at least one item');
     }
     if (basket.some((item) => item.title === title)) {
       const index = basket.findIndex((item) => item.title === title);
@@ -75,7 +75,7 @@ const Productcard: FC<ProductCardProps> = ({
       newBasket[index].price = newBasket[index].price + price * amount;
       updateBasket(newBasket);
       setAmount(1);
-      toast.success("Added to cart!");
+      toast.success('Added to cart!');
       return;
     }
     updateBasket([
@@ -91,14 +91,14 @@ const Productcard: FC<ProductCardProps> = ({
       },
     ]);
     setAmount(1);
-    toast.success("Added to cart!");
+    toast.success('Added to cart!');
   };
   return (
-    <div className={"flex flex-col content-around"}>
+    <div className={'flex flex-col content-around'}>
       <div className="w-52 h-auto bg-slate-100 p-2 relative">
         {isfeatured === true ? (
-          <div className={"absolute z-20"}>
-            <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
+          <div className={'absolute z-20'}>
+            <p className={'bg-red-800 text-white rotate-6 '}>Featured</p>
           </div>
         ) : null}
         <div className="bg-slate-900 p-24 relative">
@@ -112,9 +112,9 @@ const Productcard: FC<ProductCardProps> = ({
         </div>
         <h2 className="text-center">
           {(price * amount).toString().slice(0, -6) +
-            " " +
+            ' ' +
             (price * amount).toString().slice(-6, -3) +
-            " " +
+            ' ' +
             (price * amount).toString().slice(-3)}
           :-
         </h2>
@@ -128,26 +128,17 @@ const Productcard: FC<ProductCardProps> = ({
           ingredients={ingredients}
         />
 
-        <div className="amountAndPurchase flex bg-slate-200 justify-between p-2 items-center ">
-          <div className="flex w-20 justify-between">
-            <button
-              className="decreaseAmount w-full bg-slate-400"
-              onClick={minusOne}
-            >
+        <div className="amountAndPurchase flex border-black border justify-between items-center ">
+          <div className="flex w-20 justify-between ">
+            <button className="decreaseAmount w-full hover:bg-blue-200 h-10" onClick={minusOne}>
               -
             </button>
-            <p className="amount">{amount}</p>
-            <button
-              className="increaseAmount w-full bg-slate-400"
-              onClick={plusOne}
-            >
+            <p className="amount self-center">{amount}</p>
+            <button className="increaseAmount w-full hover:bg-blue-200 h-10" onClick={plusOne}>
               +
             </button>
           </div>
-          <button
-            className="purchaseButton p-1 w-20 bg-slate-400 rounded-md"
-            onClick={() => buyStuffz(title)}
-          >
+          <button className="purchaseButton w-20 rounded-lg hover:bg-green-200 h-10" onClick={() => buyStuffz(title)}>
             KÖP
           </button>
         </div>
