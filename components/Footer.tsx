@@ -14,15 +14,14 @@ const Footer = () => {
           <p className="underline text-2xl">Hakim Livs</p>
           <p>Öppet: 10:00 - 22:00, varje dag!</p>
           <p>Adress: Tomtebodavägen 3A, 171 65 Solna</p>
-          <a href="hakimlivs@info.se">hakimlivs@info.se</a>
+          <a href="hakimlivs@info.se">info@hakimlivs.se</a>
+          <p>Telefon: 073-777 777 7</p>
         </div>
       </div>
-
       <div className="text-right space-y-1">
         <p className="underline">
-          Betalning i online-shopen sker via Swish till:
+          Betalning i online-shopen sker via Swish till: 073-777 777 7
         </p>
-        <p>Telefon: 073-777 777 7</p>
         <p>Eller kontant vid leverans </p>
       </div>
     </footer>
