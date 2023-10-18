@@ -77,8 +77,18 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       };
     });
 
+    let values2 = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      street: values.street,
+      zipCode: values.zipCode.toString(),
+      city: values.city,
+    };
+
     const sendingData = {
-      ...values,
+      ...values2,
       basketerino,
       order_total: subtotal + 50,
     };
@@ -106,7 +116,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       email: "",
       phone: "",
       street: "",
-      zipCode: "",
+      zipCode: 0,
       city: "",
     },
   });
