@@ -15,9 +15,10 @@ import { CheckoutForm } from "../../components/CheckoutForm";
 const CheckoutPage = () => {
   const basket = useItemStore((state) => state.basket);
   const subtotal = basket.reduce((acc, item) => acc + item.price, 0);
+  const updateSearch = useItemStore((state) => state.updateSearch);
 
   let content;
-
+  updateSearch("");
   if (basket.length === 0) {
     content = (
       <div className="p-48 bg-white">
