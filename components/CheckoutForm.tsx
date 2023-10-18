@@ -53,10 +53,10 @@ const formSchema = z.object({
     .max(250, { message: "Street-adress is too long" }),
   zipCode: z
     .number()
-    .min(5, {
+    .min(10000, {
       message: "You must fill in your zip code",
     })
-    .max(10, { message: "Zip code is too long" }),
+    .max(999999, { message: "Zip code is too long" }),
   city: z
     .string()
     .min(2, {
@@ -201,7 +201,21 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             <FormItem>
               <FormLabel>Ditt postnummer:</FormLabel>
               <FormControl>
-                <Input placeholder="ZipCode..." {...field} />
+                <Input
+                  placeholder="ZipCode..."
+                  {...field}
+                  value={+field.value}
+                  onChange={(event) => {
+                    let newValue = event.target.value;
+                    if (newValue.startsWith("0")) {
+                      newValue = newValue.substring(1);
+                      console.log(newValue);
+                    }
+                    event.target.value = newValue;
+                    field.value = +newValue;
+                    field.onChange(+event.target.value);
+                  }}
+                />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />
