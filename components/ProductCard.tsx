@@ -109,7 +109,7 @@ const Productcard: FC<ProductCardProps> = ({
             <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
           </div>
         ) : null}
-        {stock === 0 ? (
+        {stock === 0 || stock < 0 ? (
           <div className="absolute z-20 top-20 right-14">
             <p className="bg-red-800 text-white">Out of stock</p>
           </div>
