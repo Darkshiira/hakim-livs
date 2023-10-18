@@ -45,12 +45,7 @@ const ArticleSection: React.FC = () => {
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          const stockedproducts = sortproducts.filter(
-            (product: ProductData) => {
-              return product.stock > 0;
-            }
-          );
-          const filterdproducts = stockedproducts.filter(
+          const filterdproducts = sortproducts.filter(
             (product: ProductData) =>
               product.title.toLowerCase().includes(search.toLowerCase()) ||
               product.manufacturer.toLowerCase().includes(search.toLowerCase())
@@ -66,12 +61,8 @@ const ArticleSection: React.FC = () => {
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          const stockedproducts = sortproducts.filter(
-            (product: ProductData) => {
-              return product.stock > 0;
-            }
-          );
-          const searchedproducts = stockedproducts.filter(
+
+          const searchedproducts = sortproducts.filter(
             (product: ProductData) =>
               product.title.toLowerCase().includes(search.toLowerCase()) ||
               product.manufacturer.toLowerCase().includes(search.toLowerCase())

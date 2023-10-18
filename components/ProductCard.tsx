@@ -109,6 +109,11 @@ const Productcard: FC<ProductCardProps> = ({
             <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
           </div>
         ) : null}
+        {stock === 0 ? (
+          <div className="absolute z-20 top-20 right-14">
+            <p className="bg-red-800 text-white">Out of stock</p>
+          </div>
+        ) : null}
         <div className="bg-slate-900 p-24 relative">
           <Image src={image} alt="food" layout="fill" style={imageStyle} />
         </div>
