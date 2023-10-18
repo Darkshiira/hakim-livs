@@ -1,3 +1,8 @@
+//A footer component that is used on every page
+//It is imported in the layout component
+//It displays the store information and contact information
+//TODO HARDCODED INFORMATION
+//TODO ADD SOCIAL MEDIA ICONS
 
 import Image from "next/image";
 const Footer = () => {

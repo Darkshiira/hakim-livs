@@ -1,7 +1,11 @@
+//This is a hero that fetches the billboard from the CMS and displays it.
+// It is featured in the landingpage page.tsx.
+
 "use client";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Image from "next/image";
+import { CSSProperties } from "react";
 
 const Hero = () => {
   const [billboardurl, setBillboardurl] = useState("");
@@ -24,14 +28,24 @@ const Hero = () => {
       });
   }, []);
 
+  const imageStyle: CSSProperties = {
+    objectFit: "cover",
+    height: "300px",
+    width: "full",
+  };
+
   return (
     <section>
       {banner ? (
-        <div className="hero bg-green-200 flex content-center justify-center items-center overflow-hidden ">
-          <div className="w-[1800px] h-[228px]">
-            <Image src={billboardurl} alt="food" width="1800" height="228" />
-          </div>
-          <p className="absolute mt-10 bg-transparent text-white text-6xl z-20">
+        <div className="hero bg-green-100 flex justify-center items-center overflow-hidden ">
+          <Image
+            src={billboardurl}
+            alt="food"
+            width="1800"
+            height="228"
+            style={imageStyle}
+          />
+          <p className="absolute bg-transparent text-white text-6xl z-20">
             {billboardTitle}
           </p>
         </div>

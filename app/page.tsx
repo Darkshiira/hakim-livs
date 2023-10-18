@@ -1,3 +1,5 @@
+//This is the landingpage, where we import the Nav, Hero and MainSection component
+
 import Footer from "../components/Footer";
 import Hero from "../components/Hero";
 import MainSection from "../components/MainSection";
@@ -8,7 +10,7 @@ export default function Home() {
     <div className="bg-slate-300">
       <Nav />
       <Hero />
-      <MainSection />;
+      <MainSection />
     </div>
   );
 }

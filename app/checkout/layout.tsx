@@ -1,5 +1,7 @@
+//The layout for the checkout page
+
 export default function CheckoutLayout({
-  children, // will be a page or nested layout
+  children,
 }: {
   children: React.ReactNode;
 }) {

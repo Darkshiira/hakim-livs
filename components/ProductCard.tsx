@@ -1,3 +1,10 @@
+// This is the ProductCard component, where we import the useItemStore hook to get the basket state, it is featured in the ArticleSection component.
+// We also use the updateBasket action to update the basket state.
+// We also use the Toaster component from react-hot-toast to display toasts when adding or removing items from the basket.
+// We also use the BigProductCard component to display the product in a bigger format.
+// We also use the Image component from next/image to display the product image.
+// We also use the useState hook to set the amount of items to buy.
+
 "use client";
 
 import Image from "next/image";
@@ -6,9 +13,6 @@ import { useState } from "react";
 import { useItemStore } from "../app/zustand/zustandStore";
 import toast, { Toaster } from "react-hot-toast";
 import BigProductCard from "./BigProductCard";
-
-// Mall för produkterna som laddas in på frontpage (kan självklart användas på andra platser där produkter ska in också)
-// TODO: lägg till funktion på knapparna
 
 interface ProductCardProps {
   id: string;
@@ -128,24 +132,24 @@ const Productcard: FC<ProductCardProps> = ({
           ingredients={ingredients}
         />
 
-        <div className="amountAndPurchase flex bg-slate-200 justify-between p-2 items-center ">
-          <div className="flex w-20 justify-between">
+        <div className="amountAndPurchase flex border-black border justify-between items-center ">
+          <div className="flex w-20 justify-between ">
             <button
-              className="decreaseAmount w-full bg-slate-400"
+              className="decreaseAmount w-full hover:bg-blue-200 h-10"
               onClick={minusOne}
             >
               -
             </button>
-            <p className="amount">{amount}</p>
+            <p className="amount self-center">{amount}</p>
             <button
-              className="increaseAmount w-full bg-slate-400"
+              className="increaseAmount w-full hover:bg-blue-200 h-10"
               onClick={plusOne}
             >
               +
             </button>
           </div>
           <button
-            className="purchaseButton p-1 w-20 bg-slate-400 rounded-md"
+            className="purchaseButton w-20 rounded-lg hover:bg-green-200 h-10"
             onClick={() => buyStuffz(title)}
           >
             KÖP

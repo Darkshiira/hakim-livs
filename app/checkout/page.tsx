@@ -1,3 +1,11 @@
+//The page for the checkout page, here we call for the CheckoutForm component and pass in the basket and subtotal as props.
+
+//We also use the useItemStore hook to get the basket and subtotal from the zustand store.
+//We also use the Image component from next/image to display the images of the items in the basket.
+//We also use the CheckoutForm component to display the form for the user to fill in their information.
+
+//TODO HARDCODED SHIPPING COSTS AND PAYMENT METHOD
+
 "use client";
 import React from "react";
 import Image from "next/image";

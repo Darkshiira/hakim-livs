@@ -1,3 +1,8 @@
+//This is a component that is used to display a product in a bigger format.
+//It is used in the ArticleSection component and uses the Popover component from Headless UI.
+//It displays the product image, title, manufacturer, size, price, description and ingredients.
+//It is also connected to the basket state and uses the updateBasket action to update the basket state.
+
 "use client";
 import Image from "next/image";
 import { Popover } from "@headlessui/react";
@@ -66,7 +71,7 @@ const BigProductCard = (props: any) => {
     <>
       <Popover>
         <Popover.Button className="underline hover:text-blue-600">
-          Info om produkten
+          Produktinfo
         </Popover.Button>
 
         <Popover.Panel className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-3xl bg-white border rounded-lg shadow-md p-2 z-50">
