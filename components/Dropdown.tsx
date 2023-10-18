@@ -1,16 +1,13 @@
-'use client';
-import { Menu } from '@headlessui/react';
-import { useItemStore } from '../app/zustand/zustandStore';
-
-// Dropdown menyn som visar de olika kategorierna i aside på första sidan
-// TODO: Ändra så länkarna går till rätt produkter
+//Dropdown used in CategoryAside.tsx
+//In the future it can be used to display subcategories
+"use client";
+import { Menu } from "@headlessui/react";
+import { useItemStore } from "../app/zustand/zustandStore";
 
 function Dropdown({ props = {} }: { props?: any }) {
-  //saves the category in zustand
   const category = useItemStore((state) => state.category);
   const updateCategory = useItemStore((state) => state.updateCategory);
 
-  //onclick function that saves the category in zustand
   const sendCategory = () => {
     updateCategory(props);
   };

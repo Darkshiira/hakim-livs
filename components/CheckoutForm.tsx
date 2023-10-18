@@ -1,3 +1,7 @@
+//This is a component inside the Checkout page, where the customer can fill in its information and place an order.
+//We use the react-hook-form library to handle the form validation and submission.
+// We send the data in format of the formSchema +  basket + subtotal to the backend.
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";

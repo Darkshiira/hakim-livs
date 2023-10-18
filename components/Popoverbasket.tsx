@@ -1,3 +1,9 @@
+// This is the Popoverbasket component, where we import the useItemStore hook to get the basket state.
+// It displays the items that are in the basket and the total price of the items.
+// It also uses the updateBasket action to update the basket state.
+// It also uses the clearBasket action to clear the basket.
+// It also uses the Link component from next/link to link to the checkout page.
+
 import { Popover } from "@headlessui/react";
 import { useItemStore } from "../app/zustand/zustandStore";
 import { AiOutlineShoppingCart } from "react-icons/ai";

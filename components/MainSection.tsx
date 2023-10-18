@@ -1,7 +1,7 @@
-import ArticleSection from './ArticleSection';
-import CategoryAside from './CategoryAside';
+//Main section of the page, contains the article section and the category aside
 
-// Huvudinnehållet som är mellan navbar och footer på första sidan
+import ArticleSection from "./ArticleSection";
+import CategoryAside from "./CategoryAside";
 
 const MainSection = () => {
   return (
