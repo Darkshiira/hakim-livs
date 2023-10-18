@@ -26,25 +26,43 @@ const phoneRegex = new RegExp(
 );
 
 const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "You must fill in your name",
-  }),
-  lastName: z.string().min(2, {
-    message: "You must fill in your last name",
-  }),
-  email: z.string().email({
-    message: "You must fill in your email",
-  }),
+  firstName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your name",
+    })
+    .max(250, { message: "Name is too long" }),
+  lastName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your last name",
+    })
+    .max(250, { message: "Name is too long" }),
+  email: z
+    .string()
+    .email({
+      message: "You must fill in your email",
+    })
+    .max(250, { message: "email is too long" }),
   phone: z.string().regex(phoneRegex, "Invalid Number!"),
-  street: z.string().min(5, {
-    message: "You must fill in your address",
-  }),
-  zipCode: z.string().min(5, {
-    message: "You must fill in your zip code",
-  }),
-  city: z.string().min(2, {
-    message: "You must fill in your city",
-  }),
+  street: z
+    .string()
+    .min(5, {
+      message: "You must fill in your street-address",
+    })
+    .max(250, { message: "Street-adress is too long" }),
+  zipCode: z
+    .number()
+    .min(5, {
+      message: "You must fill in your zip code",
+    })
+    .max(10, { message: "Zip code is too long" }),
+  city: z
+    .string()
+    .min(2, {
+      message: "You must fill in your city",
+    })
+    .max(250, { message: "Cityname is too long" }),
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
