@@ -86,7 +86,7 @@ export default function MyPopover() {
             {basket.map((item) => (
               <div key={item.title} className="grid grid-cols-3">
                 <p className="text-left">
-                  {item.title.length > 7 ? (
+                  {item.title.length > 14 ? (
                     <span onClick={showAll}>
                       {showall
                         ? item.title
