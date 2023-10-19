@@ -25,6 +25,7 @@ const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 const noNumber = new RegExp(/^([^0-9]*)$/);
+const mustbeNumber = new RegExp(/^([0-9]*)$/);
 
 const formSchema = z.object({
   firstName: z
@@ -58,11 +59,10 @@ const formSchema = z.object({
     })
     .max(250, { message: "Street-adress is too long" }),
   zipCode: z
-    .number()
-    .gte(10000, {
-      message: "You must fill in your zip code",
-    })
-    .lte(999999, { message: "Zip code is too long" }),
+    .string()
+    .min(5, { message: "You must fill in your zipcode" })
+    .max(5, { message: "Zipcode is too long" })
+    .regex(mustbeNumber, { message: "Only numbers!" }),
   city: z
     .string()
     .min(2, {
@@ -209,21 +209,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             <FormItem>
               <FormLabel>Ditt postnummer:</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="ZipCode..."
-                  {...field}
-                  value={+field.value}
-                  onChange={(event) => {
-                    let newValue = event.target.value;
-                    if (newValue.startsWith("0")) {
-                      newValue = newValue.substring(1);
-                      console.log(newValue);
-                    }
-                    event.target.value = newValue;
-                    field.value = +newValue;
-                    field.onChange(+event.target.value);
-                  }}
-                />
+                <Input placeholder="ZipCode..." {...field} />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />
