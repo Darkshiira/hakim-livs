@@ -78,7 +78,7 @@ const Productcard: FC<ProductCardProps> = ({
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
-    if (amount > stockState) {
+    if (amount >= stockState) {
       toast.error("Not enough items in stock!");
       return;
     }

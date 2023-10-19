@@ -50,6 +50,9 @@ export default function MyPopover() {
     });
     const updatedBasket = newBasket.filter((item) => item.amount > 0);
     updateBasket(updatedBasket);
+    if (updatedBasket.length === 0) {
+      window.location.reload();
+    }
   };
 
   const clearingBasket = () => {
@@ -100,9 +103,6 @@ export default function MyPopover() {
                   <button
                     onClick={(e) => {
                       decreaseAmount(item.title);
-                      if (basket.length === 1) {
-                        window.location.reload();
-                      }
                     }}
                   >
                     -
