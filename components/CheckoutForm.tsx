@@ -24,6 +24,7 @@ import { Basket } from "@/components/BasketType";
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
+const noNumber = new RegExp(/^([^0-9]*)$/);
 
 const formSchema = z.object({
   firstName: z
@@ -31,19 +32,24 @@ const formSchema = z.object({
     .min(2, {
       message: "You must fill in your name",
     })
-    .max(250, { message: "Name is too long" }),
+    .max(250, { message: "Name is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
   lastName: z
     .string()
     .min(2, {
       message: "You must fill in your last name",
     })
-    .max(250, { message: "Name is too long" }),
+    .max(250, { message: "Name is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
   email: z
     .string()
     .email({
       message: "You must fill in your email",
     })
-    .max(250, { message: "email is too long" }),
+    .max(250, { message: "email is too long" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
   phone: z.string().regex(phoneRegex, "Invalid Number!"),
   street: z
     .string()
@@ -53,16 +59,18 @@ const formSchema = z.object({
     .max(250, { message: "Street-adress is too long" }),
   zipCode: z
     .number()
-    .min(10000, {
+    .gte(10000, {
       message: "You must fill in your zip code",
     })
-    .max(999999, { message: "Zip code is too long" }),
+    .lte(999999, { message: "Zip code is too long" }),
   city: z
     .string()
     .min(2, {
       message: "You must fill in your city",
     })
-    .max(250, { message: "Cityname is too long" }),
+    .max(250, { message: "Cityname is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
