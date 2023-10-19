@@ -85,6 +85,7 @@ const ArticleSection: React.FC = () => {
             onChange={(e) => {
               useItemStore.setState({ search: e.target.value });
             }}
+            value={search}
           />
           <button className="hover:text-blue-500">Sök</button>
         </div>
