@@ -45,6 +45,10 @@ const BigProductCard = (props: any) => {
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
+    if (amount > props.stock) {
+      toast.error("Not enough items in stock!");
+      return;
+    }
     if (basket.some((item) => item.title === props.title)) {
       const index = basket.findIndex((item) => item.title === props.title);
       const newBasket = [...basket];

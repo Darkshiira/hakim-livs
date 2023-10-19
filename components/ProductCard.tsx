@@ -72,6 +72,10 @@ const Productcard: FC<ProductCardProps> = ({
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
+    if (amount > stock) {
+      toast.error("Not enough items in stock!");
+      return;
+    }
     if (basket.some((item) => item.title === title)) {
       const index = basket.findIndex((item) => item.title === title);
       const newBasket = [...basket];
@@ -103,6 +107,11 @@ const Productcard: FC<ProductCardProps> = ({
         {isfeatured === true ? (
           <div className={"absolute z-20"}>
             <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
+          </div>
+        ) : null}
+        {stock === 0 || stock < 0 ? (
+          <div className="absolute z-20 top-20 right-14">
+            <p className="bg-red-800 text-white">Out of stock</p>
           </div>
         ) : null}
         <div className="bg-slate-900 p-24 relative">

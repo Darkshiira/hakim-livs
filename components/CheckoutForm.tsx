@@ -26,25 +26,43 @@ const phoneRegex = new RegExp(
 );
 
 const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "You must fill in your name",
-  }),
-  lastName: z.string().min(2, {
-    message: "You must fill in your last name",
-  }),
-  email: z.string().email({
-    message: "You must fill in your email",
-  }),
+  firstName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your name",
+    })
+    .max(250, { message: "Name is too long" }),
+  lastName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your last name",
+    })
+    .max(250, { message: "Name is too long" }),
+  email: z
+    .string()
+    .email({
+      message: "You must fill in your email",
+    })
+    .max(250, { message: "email is too long" }),
   phone: z.string().regex(phoneRegex, "Invalid Number!"),
-  street: z.string().min(5, {
-    message: "You must fill in your address",
-  }),
-  zipCode: z.string().min(5, {
-    message: "You must fill in your zip code",
-  }),
-  city: z.string().min(2, {
-    message: "You must fill in your city",
-  }),
+  street: z
+    .string()
+    .min(5, {
+      message: "You must fill in your street-address",
+    })
+    .max(250, { message: "Street-adress is too long" }),
+  zipCode: z
+    .number()
+    .min(10000, {
+      message: "You must fill in your zip code",
+    })
+    .max(999999, { message: "Zip code is too long" }),
+  city: z
+    .string()
+    .min(2, {
+      message: "You must fill in your city",
+    })
+    .max(250, { message: "Cityname is too long" }),
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
@@ -59,8 +77,18 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       };
     });
 
+    let values2 = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      street: values.street,
+      zipCode: values.zipCode.toString(),
+      city: values.city,
+    };
+
     const sendingData = {
-      ...values,
+      ...values2,
       basketerino,
       order_total: subtotal + 50,
     };
@@ -88,7 +116,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       email: "",
       phone: "",
       street: "",
-      zipCode: "",
+      zipCode: 0,
       city: "",
     },
   });
@@ -173,7 +201,21 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             <FormItem>
               <FormLabel>Ditt postnummer:</FormLabel>
               <FormControl>
-                <Input placeholder="ZipCode..." {...field} />
+                <Input
+                  placeholder="ZipCode..."
+                  {...field}
+                  value={+field.value}
+                  onChange={(event) => {
+                    let newValue = event.target.value;
+                    if (newValue.startsWith("0")) {
+                      newValue = newValue.substring(1);
+                      console.log(newValue);
+                    }
+                    event.target.value = newValue;
+                    field.value = +newValue;
+                    field.onChange(+event.target.value);
+                  }}
+                />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />
