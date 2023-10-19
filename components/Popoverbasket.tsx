@@ -100,6 +100,9 @@ export default function MyPopover() {
                   <button
                     onClick={(e) => {
                       decreaseAmount(item.title);
+                      if (basket.length === 1) {
+                        window.location.reload();
+                      }
                     }}
                   >
                     -
