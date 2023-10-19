@@ -124,11 +124,16 @@ const Productcard: FC<ProductCardProps> = ({
           <p className="product-size">{size}</p>
         </div>
         <h2 className="text-center">
-          {(price * amount).toString().slice(0, -6) +
-            " " +
-            (price * amount).toString().slice(-6, -3) +
-            " " +
-            (price * amount).toString().slice(-3)}
+          {price.toString().includes(".")
+            ? 
+              (price * amount).toString().slice(0, -6) +
+              " " +
+              (price * amount).toString().slice(-6)
+            : (price * amount).toString().slice(0, -6) +
+              " " +
+              (price * amount).toString().slice(-6, -3) +
+              " " +
+              (price * amount).toString().slice(-3)}
           :-
         </h2>
         <BigProductCard
