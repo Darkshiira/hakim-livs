@@ -1,3 +1,5 @@
+//This is a type for the basket items
+
 export type Basket = {
   title: string;
   amount: number;

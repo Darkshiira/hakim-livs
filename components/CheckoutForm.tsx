@@ -1,3 +1,7 @@
+//This is a component inside the Checkout page, where the customer can fill in its information and place an order.
+//We use the react-hook-form library to handle the form validation and submission.
+// We send the data in format of the formSchema +  basket + subtotal to the backend.
+
 "use client";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -20,27 +24,53 @@ import { Basket } from "@/components/BasketType";
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
+const noNumber = new RegExp(/^([^0-9]*)$/);
 
 const formSchema = z.object({
-  firstName: z.string().min(2, {
-    message: "You must fill in your name",
-  }),
-  lastName: z.string().min(2, {
-    message: "You must fill in your last name",
-  }),
-  email: z.string().email({
-    message: "You must fill in your email",
-  }),
+  firstName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your name",
+    })
+    .max(250, { message: "Name is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
+  lastName: z
+    .string()
+    .min(2, {
+      message: "You must fill in your last name",
+    })
+    .max(250, { message: "Name is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
+  email: z
+    .string()
+    .email({
+      message: "You must fill in your email",
+    })
+    .max(250, { message: "email is too long" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
   phone: z.string().regex(phoneRegex, "Invalid Number!"),
-  street: z.string().min(5, {
-    message: "You must fill in your address",
-  }),
-  zipCode: z.string().min(5, {
-    message: "You must fill in your zip code",
-  }),
-  city: z.string().min(2, {
-    message: "You must fill in your city",
-  }),
+  street: z
+    .string()
+    .min(5, {
+      message: "You must fill in your street-address",
+    })
+    .max(250, { message: "Street-adress is too long" }),
+  zipCode: z
+    .number()
+    .gte(10000, {
+      message: "You must fill in your zip code",
+    })
+    .lte(999999, { message: "Zip code is too long" }),
+  city: z
+    .string()
+    .min(2, {
+      message: "You must fill in your city",
+    })
+    .max(250, { message: "Cityname is too long" })
+    .regex(noNumber, { message: "No numbers!" })
+    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
@@ -55,8 +85,18 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       };
     });
 
+    let values2 = {
+      firstName: values.firstName,
+      lastName: values.lastName,
+      email: values.email,
+      phone: values.phone,
+      street: values.street,
+      zipCode: values.zipCode.toString(),
+      city: values.city,
+    };
+
     const sendingData = {
-      ...values,
+      ...values2,
       basketerino,
       order_total: subtotal + 50,
     };
@@ -84,7 +124,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       email: "",
       phone: "",
       street: "",
-      zipCode: "",
+      zipCode: 0,
       city: "",
     },
   });
@@ -169,7 +209,21 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             <FormItem>
               <FormLabel>Ditt postnummer:</FormLabel>
               <FormControl>
-                <Input placeholder="ZipCode..." {...field} />
+                <Input
+                  placeholder="ZipCode..."
+                  {...field}
+                  value={+field.value}
+                  onChange={(event) => {
+                    let newValue = event.target.value;
+                    if (newValue.startsWith("0")) {
+                      newValue = newValue.substring(1);
+                      console.log(newValue);
+                    }
+                    event.target.value = newValue;
+                    field.value = +newValue;
+                    field.onChange(+event.target.value);
+                  }}
+                />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />

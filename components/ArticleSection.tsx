@@ -1,3 +1,9 @@
+//This is the ArticleSection component, where we import the ProductCard component
+// We also use the useItemStore hook to get the category and search state.
+// We pass fetch the products from the CMS and filter them with the category and search state to show the correct products.
+// We also use the ProductCard component to display the products.
+// The fetched products are then passed as props to the ProductCard component with the spread operator.
+
 "use client";
 
 import Productcard from "./ProductCard";
@@ -23,7 +29,6 @@ interface ProductData {
 }
 
 const ArticleSection: React.FC = () => {
-  //To get the category from zustand
   const category = useItemStore((state) => state.category);
   const [products, setProducts] = useState<ProductData[]>([]);
   const search = useItemStore((state) => state.search);
@@ -33,19 +38,14 @@ const ArticleSection: React.FC = () => {
     axios
       .get(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/${process.env.NEXT_PUBLIC_STOREID}/products/${id}`
-      ) //TODO FIXA RÄTT STOREID
+      )
       .then(function (response) {
         if (category === "Alla" || category === "") {
           const sortproducts = response.data.sort(
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          const stockedproducts = sortproducts.filter(
-            (product: ProductData) => {
-              return product.stock > 0;
-            }
-          );
-          const filterdproducts = stockedproducts.filter(
+          const filterdproducts = sortproducts.filter(
             (product: ProductData) =>
               product.title.toLowerCase().includes(search.toLowerCase()) ||
               product.manufacturer.toLowerCase().includes(search.toLowerCase())
@@ -61,12 +61,8 @@ const ArticleSection: React.FC = () => {
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
           );
-          const stockedproducts = sortproducts.filter(
-            (product: ProductData) => {
-              return product.stock > 0;
-            }
-          );
-          const searchedproducts = stockedproducts.filter(
+
+          const searchedproducts = sortproducts.filter(
             (product: ProductData) =>
               product.title.toLowerCase().includes(search.toLowerCase()) ||
               product.manufacturer.toLowerCase().includes(search.toLowerCase())
@@ -89,13 +85,14 @@ const ArticleSection: React.FC = () => {
             onChange={(e) => {
               useItemStore.setState({ search: e.target.value });
             }}
+            value={search}
           />
           <button className="hover:text-blue-500">Sök</button>
         </div>
         <div className="productContainer grid grid-cols-4 gap-4">
           {products.map((product) => (
             <Productcard
-              key={product.id} // Use a unique key for each Productcard
+              key={product.id}
               title={product.title}
               manufacturer={product.manufacturer}
               size={product.size}

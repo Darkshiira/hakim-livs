@@ -1,6 +1,9 @@
+// Here we create a zustand store to store the items, the update state, the reload state, the category, the basket and the search state.
+// We also create actions to update the items, update the update state, update the reload state, update the category, update the basket and update the search state.
+// We also create a function to clear the basket.
+
 import { create } from "zustand";
 
-// Zustand store to keep track of the items in the category dropdown
 type State = {
   items: Map<string, string>;
   update: boolean;
