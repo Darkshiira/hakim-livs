@@ -55,6 +55,7 @@ const Productcard: FC<ProductCardProps> = ({
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
   const [amount, setAmount] = useState(1);
+  const [stockState, setStockState] = useState(stock);
 
   const minusOne = () => {
     if (amount === 1) {
@@ -69,10 +70,15 @@ const Productcard: FC<ProductCardProps> = ({
   };
 
   const buyStuffz = (title: string) => {
+    if (stockState === 0 || stockState < 0) {
+      toast.error("Out of stock!");
+      return;
+    }
+
     if (amount === 0) {
       console.log("You need to buy at least one item");
     }
-    if (amount > stock) {
+    if (amount > stockState) {
       toast.error("Not enough items in stock!");
       return;
     }
@@ -82,8 +88,10 @@ const Productcard: FC<ProductCardProps> = ({
       newBasket[index].amount = newBasket[index].amount + amount;
       newBasket[index].price = newBasket[index].price + price * amount;
       updateBasket(newBasket);
+      setStockState(stockState - amount);
       setAmount(1);
       toast.success("Added to cart!");
+
       return;
     }
     updateBasket([
@@ -125,8 +133,7 @@ const Productcard: FC<ProductCardProps> = ({
         </div>
         <h2 className="text-center">
           {price.toString().includes(".")
-            ? 
-              (price * amount).toString().slice(0, -6) +
+            ? (price * amount).toString().slice(0, -6) +
               " " +
               (price * amount).toString().slice(-6)
             : (price * amount).toString().slice(0, -6) +
@@ -144,6 +151,9 @@ const Productcard: FC<ProductCardProps> = ({
           price={price}
           description={description}
           ingredients={ingredients}
+          stock={stockState}
+          stockState={stockState}
+          setStockState={setStockState}
         />
 
         <div className="amountAndPurchase flex border-black border justify-between items-center ">

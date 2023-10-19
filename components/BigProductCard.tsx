@@ -42,10 +42,16 @@ const BigProductCard = (props: any) => {
       id: props.id,
       stock: props.stock,
     };
-    if (amount === 0) {
-      console.log("You need to buy at least one item");
+
+    if (props.stockState === 0 || props.stockState < 0) {
+      toast.error("Not enough items in stock!");
+      ("Out of stock");
+      return;
     }
-    if (amount > props.stock) {
+    if (amount === 0) {
+      toast.error("You need to buy at least one item");
+    }
+    if (amount > props.stockState) {
       toast.error("Not enough items in stock!");
       return;
     }
@@ -61,6 +67,7 @@ const BigProductCard = (props: any) => {
     }
     updateBasket([...basket, newItem]);
     toast.success("Added to cart!");
+    props.setStockState(props.stockState - amount);
     resetAmount();
   }
 
