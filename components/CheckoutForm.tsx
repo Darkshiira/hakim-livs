@@ -20,6 +20,7 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Basket } from "@/components/BasketType";
+import { useState } from "react";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
@@ -74,7 +75,14 @@ const formSchema = z.object({
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
+  const [disable, setDisable] = useState(false);
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    if (disable) return;
+    setDisable(true);
+    setInterval(() => {
+      setDisable(false);
+    }, 2000);
+
     const basketerino = basket.map((item) => {
       return {
         title: item.title,
@@ -97,9 +105,8 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       )
       .then(function (response) {
         toast.success("Tack för din beställning, glöm inte att betala!");
-        setInterval(() => {
-          window.location.href = "/";
-        }, 2000);
+
+        window.location.href = "/";
       })
       .catch(function (error) {
         console.log(error);
@@ -114,7 +121,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       email: "",
       phone: "",
       street: "",
-      zipCode: 0,
+      zipCode: "",
       city: "",
     },
   });
