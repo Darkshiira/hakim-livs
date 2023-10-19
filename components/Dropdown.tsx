@@ -7,9 +7,11 @@ import { useItemStore } from "../app/zustand/zustandStore";
 function Dropdown({ props = {} }: { props?: any }) {
   const category = useItemStore((state) => state.category);
   const updateCategory = useItemStore((state) => state.updateCategory);
+  const updateSearch = useItemStore((state) => state.updateSearch);
 
   const sendCategory = () => {
     updateCategory(props);
+    updateSearch("");
   };
 
   return (

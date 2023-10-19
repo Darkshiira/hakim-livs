@@ -8,12 +8,15 @@ import { Popover } from "@headlessui/react";
 import { useItemStore } from "../app/zustand/zustandStore";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Link from "next/link";
+import { useState } from "react";
+import { set } from "react-hook-form";
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
   const clearBasket = useItemStore((state) => state.clearBasket);
   const totalItems = basket.reduce((total, item) => total + item.amount, 0);
+  const [showall, setShowall] = useState(false);
 
   const increaseAmount = (title: string) => {
     const newBasket = basket.map((item) => {
@@ -54,6 +57,10 @@ export default function MyPopover() {
     window.location.reload();
   };
 
+  const showAll = () => {
+    setShowall(!showall);
+  };
+
   return (
     <>
       <Popover className="relative z-50 ">
@@ -69,7 +76,7 @@ export default function MyPopover() {
         >
           {totalItems}
         </div>
-        <Popover.Panel className="absolute right-0  z-10 bg-white w-80 rounded-md text-center p-2 border border-black">
+        <Popover.Panel className="absolute right-0  z-10 bg-white w-80 rounded-md text-center p-2 border border-black overflow-auto max-h-96">
           <div className="grid grid-cols-1 mb-2">
             <div className="grid grid-cols-3 font-bold">
               <p className="text-left">Produkt</p>
@@ -78,7 +85,17 @@ export default function MyPopover() {
             </div>
             {basket.map((item) => (
               <div key={item.title} className="grid grid-cols-3">
-                <p className="text-left">{item.title}</p>
+                <p className="text-left">
+                  {item.title.length > 7 ? (
+                    <span onClick={showAll}>
+                      {showall
+                        ? item.title
+                        : ((item.title.slice(0, 7) + "...") as string)}
+                    </span>
+                  ) : (
+                    item.title
+                  )}{" "}
+                </p>
                 <div className="grid grid-cols-3">
                   <button
                     onClick={(e) => {
