@@ -19,6 +19,8 @@ type State = {
     stock: number;
   }[];
   search: string;
+  itemreduce: string;
+  itemincrease: string;
 };
 type Action = {
   updateItems: (items: State["items"]) => void;
@@ -28,6 +30,8 @@ type Action = {
   updateBasket: (basket: State["basket"]) => void;
   updateSearch: (search: State["search"]) => void;
   clearBasket: () => void;
+  updateItemreduce: (itemreduce: State["itemreduce"]) => void;
+  updateItemincrease: (itemincrease: State["itemincrease"]) => void;
 };
 
 export const useItemStore = create<State & Action>((set) => ({
@@ -54,4 +58,10 @@ export const useItemStore = create<State & Action>((set) => ({
   search: "",
   updateSearch: (search: string) => set(() => ({ search: search })),
   clearBasket: () => set((state) => ({ ...state, basket: [] })),
+  itemreduce: "",
+  updateItemreduce: (itemreduce: string) =>
+    set(() => ({ itemreduce: itemreduce })),
+  itemincrease: "",
+  updateItemincrease: (itemincrease: string) =>
+    set(() => ({ itemincrease: itemincrease })),
 }));

@@ -9,7 +9,7 @@
 
 import Image from "next/image";
 import { FC, CSSProperties } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useItemStore } from "../app/zustand/zustandStore";
 import toast, { Toaster } from "react-hot-toast";
 import BigProductCard from "./BigProductCard";
@@ -56,6 +56,36 @@ const Productcard: FC<ProductCardProps> = ({
   const updateBasket = useItemStore((state) => state.updateBasket);
   const [amount, setAmount] = useState(1);
   const [stockState, setStockState] = useState(stock);
+  const itemincrease = useItemStore((state) => state.itemincrease);
+  const updateItemincrease = useItemStore((state) => state.updateItemincrease);
+  const itemreduce = useItemStore((state) => state.itemreduce);
+  const updateItemreduce = useItemStore((state) => state.updateItemreduce);
+
+  useEffect(() => {
+    setStockState(stock);
+  }, [stock]);
+
+  useEffect(() => {
+    if (itemincrease !== "") {
+      if (itemincrease === title) {
+        if (stockState === 0 || stockState < 0) {
+          toast.error("Out of stock!");
+          return;
+        }
+        updateItemincrease("");
+        setStockState(stockState - 1);
+      }
+    }
+  }, [itemincrease, title]);
+
+  useEffect(() => {
+    if (itemreduce !== "") {
+      if (itemreduce === title) {
+        updateItemreduce("");
+        setStockState(stockState + 1);
+      }
+    }
+  }, [itemreduce, title]);
 
   const minusOne = () => {
     if (amount === 1) {
