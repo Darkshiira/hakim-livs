@@ -20,11 +20,13 @@ import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Basket } from "@/components/BasketType";
+import { useState } from "react";
 
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
 const noNumber = new RegExp(/^([^0-9]*)$/);
+const mustbeNumber = new RegExp(/^([0-9]*)$/);
 
 const formSchema = z.object({
   firstName: z
@@ -58,11 +60,10 @@ const formSchema = z.object({
     })
     .max(250, { message: "Street-adress is too long" }),
   zipCode: z
-    .number()
-    .gte(10000, {
-      message: "You must fill in your zip code",
-    })
-    .lte(999999, { message: "Zip code is too long" }),
+    .string()
+    .min(5, { message: "You must fill in your zipcode" })
+    .max(5, { message: "Zipcode is too long" })
+    .regex(mustbeNumber, { message: "Only numbers!" }),
   city: z
     .string()
     .min(2, {
@@ -74,7 +75,14 @@ const formSchema = z.object({
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
+  const [disable, setDisable] = useState(false);
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    if (disable) return;
+    setDisable(true);
+    setInterval(() => {
+      setDisable(false);
+    }, 2000);
+
     const basketerino = basket.map((item) => {
       return {
         title: item.title,
@@ -85,18 +93,8 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       };
     });
 
-    let values2 = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      phone: values.phone,
-      street: values.street,
-      zipCode: values.zipCode.toString(),
-      city: values.city,
-    };
-
     const sendingData = {
-      ...values2,
+      ...values,
       basketerino,
       order_total: subtotal + 50,
     };
@@ -107,9 +105,8 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       )
       .then(function (response) {
         toast.success("Tack för din beställning, glöm inte att betala!");
-        setInterval(() => {
-          window.location.href = "/";
-        }, 2000);
+
+        window.location.href = "/";
       })
       .catch(function (error) {
         console.log(error);
@@ -124,7 +121,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       email: "",
       phone: "",
       street: "",
-      zipCode: 0,
+      zipCode: "",
       city: "",
     },
   });
@@ -209,21 +206,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             <FormItem>
               <FormLabel>Ditt postnummer:</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="ZipCode..."
-                  {...field}
-                  value={+field.value}
-                  onChange={(event) => {
-                    let newValue = event.target.value;
-                    if (newValue.startsWith("0")) {
-                      newValue = newValue.substring(1);
-                      console.log(newValue);
-                    }
-                    event.target.value = newValue;
-                    field.value = +newValue;
-                    field.onChange(+event.target.value);
-                  }}
-                />
+                <Input placeholder="ZipCode..." {...field} />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />

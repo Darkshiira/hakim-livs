@@ -9,19 +9,28 @@ import { useItemStore } from "../app/zustand/zustandStore";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import Link from "next/link";
 import { useState } from "react";
-import { set } from "react-hook-form";
+import toast from "react-hot-toast";
 
 export default function MyPopover() {
   const basket = useItemStore((state) => state.basket);
   const updateBasket = useItemStore((state) => state.updateBasket);
   const clearBasket = useItemStore((state) => state.clearBasket);
   const totalItems = basket.reduce((total, item) => total + item.amount, 0);
+  const itemincrease = useItemStore((state) => state.itemincrease);
+  const updateIncrease = useItemStore((state) => state.updateItemincrease);
+  const itemreduce = useItemStore((state) => state.itemreduce);
+  const updateItemreduce = useItemStore((state) => state.updateItemreduce);
   const [showall, setShowall] = useState(false);
 
   const increaseAmount = (title: string) => {
     const newBasket = basket.map((item) => {
       if (item.title === title) {
+        if (item.amount >= item.stock) {
+          toast.error("Not enough items in stock!");
+          return item;
+        }
         const newAmount = item.amount + 1;
+        updateIncrease(item.title);
         return {
           ...item,
           amount: newAmount,
@@ -40,6 +49,7 @@ export default function MyPopover() {
       }
       if (item.title === title) {
         const newAmount = item.amount - 1;
+        updateItemreduce(item.title);
         return {
           ...item,
           amount: newAmount,
@@ -50,6 +60,9 @@ export default function MyPopover() {
     });
     const updatedBasket = newBasket.filter((item) => item.amount > 0);
     updateBasket(updatedBasket);
+    if (updatedBasket.length === 0) {
+      window.location.reload();
+    }
   };
 
   const clearingBasket = () => {
@@ -100,9 +113,6 @@ export default function MyPopover() {
                   <button
                     onClick={(e) => {
                       decreaseAmount(item.title);
-                      if (basket.length === 1) {
-                        window.location.reload();
-                      }
                     }}
                   >
                     -
