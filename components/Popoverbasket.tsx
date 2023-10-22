@@ -126,7 +126,16 @@ export default function MyPopover() {
                     +
                   </button>
                 </div>
-                <p className="text-right">{item.price}</p>
+                <p className="text-right">
+                  {item.price.toString().includes(".")
+                    ? item.price.toFixed(2).toString().slice(0, -6) +
+                      " " +
+                      item.price.toFixed(2).toString().slice(-6)
+                    : item.price.toFixed(2).toString().slice(0, -6) +
+                      " " +
+                      item.price.toFixed(2).toString().slice(-6)}
+                  :-{" "}
+                </p>
               </div>
             ))}
           </div>
