@@ -25,14 +25,6 @@ const Nav = () => {
           Hakim Livs
         </Link>
         <div className="flex space-x-6">
-          <Link
-            href="/"
-            className="hover:text-blue-500 flex flex-col items-center"
-            onClick={() => updateReload(!reload)}
-          >
-            <AiOutlineUser className="text-3xl" />
-            <p>Logga in</p>
-          </Link>
           <div>
             <Toaster />
             <MyPopover />

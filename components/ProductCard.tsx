@@ -144,12 +144,12 @@ const Productcard: FC<ProductCardProps> = ({
       <div className="w-52 h-auto bg-slate-100 p-2 relative">
         {isfeatured === true ? (
           <div className={"absolute z-20"}>
-            <p className={"bg-red-800 text-white rotate-6 "}>Featured</p>
+            <p className={"bg-red-800 p-1 text-white rotate-6 "}>Featured</p>
           </div>
         ) : null}
         {stock === 0 || stock < 0 ? (
           <div className="absolute z-20 top-20 right-14">
-            <p className="bg-red-800 text-white">Out of stock</p>
+            <p className="bg-black opacity-80 p-2 text-white">Out of stock</p>
           </div>
         ) : null}
         <div className="bg-slate-900 p-24 relative">
@@ -166,9 +166,11 @@ const Productcard: FC<ProductCardProps> = ({
             ? (price * amount).toFixed(2).toString().slice(0, -6) +
               " " +
               (price * amount).toFixed(2).toString().slice(-6)
-            : (price * amount).toFixed(2).toString().slice(0, -6) +
+            : (price * amount).toString().slice(0, -6) +
               " " +
-              (price * amount).toFixed(2).toString().slice(-6)}
+              (price * amount).toString().slice(-6, -3) +
+              " " +
+              (price * amount).toString().slice(-3)}
           :-{" "}
         </h2>
         <BigProductCard
