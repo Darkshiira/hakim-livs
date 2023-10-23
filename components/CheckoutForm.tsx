@@ -6,7 +6,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -18,10 +17,9 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import toast from "react-hot-toast";
 import { Basket } from "@/components/BasketType";
 import { useState } from "react";
-
+import { CheckoutPopup } from "@/components/CheckoutPopup";
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
@@ -32,51 +30,60 @@ const formSchema = z.object({
   firstName: z
     .string()
     .min(2, {
-      message: "You must fill in your name",
+      message: "Du måste fylla i förnamn",
     })
-    .max(250, { message: "Name is too long" })
-    .regex(noNumber, { message: "No numbers!" })
-    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
+    .max(250, { message: "aörnmnet är för långt" })
+    .regex(noNumber, { message: "Inga nummer i förnamnet!" })
+    .refine((s) => !s.includes(" "), {
+      message: "Inga mellanslag i förnamnet!",
+    }),
   lastName: z
     .string()
     .min(2, {
-      message: "You must fill in your last name",
+      message: "Du måste fylla i efternamn",
     })
-    .max(250, { message: "Name is too long" })
-    .regex(noNumber, { message: "No numbers!" })
-    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
+    .max(250, { message: "Efternamnet är för långt" })
+    .regex(noNumber, { message: "Inga nummer i efternamnet!" })
+    .refine((s) => !s.includes(" "), {
+      message: "Inga mellanslag i efternamnet!",
+    }),
   email: z
     .string()
     .email({
-      message: "You must fill in your email",
+      message: "Du måste fylla i e-mail",
     })
-    .max(250, { message: "email is too long" })
-    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
-  phone: z.string().regex(phoneRegex, "Invalid Number!"),
+    .max(250, { message: "E-mail är för långt!" })
+    .refine((s) => !s.includes(" "), { message: "Inga mellanslag i e-mailen" }),
+  phone: z.string().regex(phoneRegex, "Felaktigt telefonnummer!"),
   street: z
     .string()
     .min(5, {
-      message: "You must fill in your street-address",
+      message: "Du måste fylla i gatuadressen",
     })
-    .max(250, { message: "Street-adress is too long" }),
+    .max(250, { message: "Gatuadressen är för lång" }),
   zipCode: z
     .string()
-    .min(5, { message: "You must fill in your zipcode" })
-    .max(5, { message: "Zipcode is too long" })
-    .regex(mustbeNumber, { message: "Only numbers!" }),
+    .min(5, { message: "Du måste fylla i postnummer" })
+    .max(5, { message: "Postnummer får inte vara längre än 5 siffror " })
+    .regex(mustbeNumber, { message: "Bara nummer!" }),
   city: z
     .string()
     .min(2, {
-      message: "You must fill in your city",
+      message: "Du måste fylla i stadsnamnet",
     })
-    .max(250, { message: "Cityname is too long" })
-    .regex(noNumber, { message: "No numbers!" })
-    .refine((s) => !s.includes(" "), { message: "No Spaces!" }),
+    .max(250, { message: "Stadsnamn är för långt" })
+    .regex(noNumber, { message: "Inga nummer i stadsnamnet!" })
+    .refine((s) => !s.includes(" "), {
+      message: "Inga mellanslag  i stadsnamnet!",
+    }),
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
   const [disable, setDisable] = useState(false);
+  const [popmsg, setPopmsg] = useState("");
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    setPopmsg("Din order skickas, vänta en stund");
     if (disable) return;
     setDisable(true);
     setInterval(() => {
@@ -104,12 +111,10 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         { sendingData }
       )
       .then(function (response) {
-        toast.success("Tack för din beställning, glöm inte att betala!");
-
-        window.location.href = "/";
+        setPopmsg("Tack för din beställning, glöm inte att betala!");
       })
       .catch(function (error) {
-        console.log(error);
+        setPopmsg(error.response.data);
       });
   };
 
@@ -134,7 +139,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ditt förnamn:</FormLabel>
+              <FormLabel>Förnamn:</FormLabel>
               <FormControl>
                 <Input placeholder="Surname.." {...field} />
               </FormControl>
@@ -148,7 +153,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ditt efternamn:</FormLabel>
+              <FormLabel>Efternamn:</FormLabel>
               <FormControl>
                 <Input placeholder="Lastname..." {...field} />
               </FormControl>
@@ -162,7 +167,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Din email-adress:</FormLabel>
+              <FormLabel>Email-adress:</FormLabel>
               <FormControl>
                 <Input placeholder="Email..." {...field} />
               </FormControl>
@@ -176,7 +181,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="phone"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ditt telefonnummer:</FormLabel>
+              <FormLabel>Telefonnummer:</FormLabel>
               <FormControl>
                 <Input placeholder="Phone..." {...field} />
               </FormControl>
@@ -190,7 +195,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="street"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Din gatuadress:</FormLabel>
+              <FormLabel>Gatuadress:</FormLabel>
               <FormControl>
                 <Input placeholder="Street..." {...field} />
               </FormControl>
@@ -204,7 +209,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="zipCode"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ditt postnummer:</FormLabel>
+              <FormLabel>Postnummer:</FormLabel>
               <FormControl>
                 <Input placeholder="ZipCode..." {...field} />
               </FormControl>
@@ -218,7 +223,7 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
           name="city"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Din stad:</FormLabel>
+              <FormLabel>Stad:</FormLabel>
               <FormControl>
                 <Input placeholder="City..." {...field} />
               </FormControl>
@@ -227,7 +232,8 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             </FormItem>
           )}
         />
-        <Button type="submit">KÖP</Button>
+
+        <CheckoutPopup msg={popmsg} />
       </form>
     </Form>
   );

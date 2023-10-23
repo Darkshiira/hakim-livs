@@ -47,34 +47,40 @@ const CheckoutPage = () => {
               </div>
               <p>
                 {item.amount} a {item.size} :{" "}
-                {item.price.toString().slice(0, -6) +
-                  " " +
-                  item.price.toString().slice(-6, -3) +
-                  " " +
-                  item.price.toString().slice(-3)}
-                Sek
+                {item.price.toString().includes(".")
+                  ? item.price.toFixed(2).toString().slice(0, -6) +
+                    " " +
+                    item.price.toFixed(2).toString().slice(-6)
+                  : item.price.toFixed(2).toString().slice(0, -6) +
+                    " " +
+                    item.price.toFixed(2).toString().slice(-6)}
+                SEK
               </p>
             </div>
           ))}
           <div>
             <p className="text-right">
-              Subtotal:
-              {subtotal.toString().slice(0, -6) +
-                " " +
-                subtotal.toString().slice(-6, -3) +
-                " " +
-                subtotal.toString().slice(-3)}{" "}
-              Sek
+              Subtotal:{" "}
+              {subtotal.toString().includes(".")
+                ? subtotal.toFixed(2).toString().slice(0, -6) +
+                  " " +
+                  subtotal.toFixed(2).toString().slice(-6)
+                : subtotal.toFixed(2).toString().slice(0, -6) +
+                  " " +
+                  subtotal.toFixed(2).toString().slice(-6)}
+              SEK
             </p>
-            <p className="text-right">Shipping: 50 Sek</p>
+            <p className="text-right">Shipping: 50 SEK</p>
             <p className="text-right font-bold">
               Total:{" "}
-              {(subtotal + 50).toString().slice(0, -6) +
-                " " +
-                (subtotal + 50).toString().slice(-6, -3) +
-                " " +
-                (subtotal + 50).toString().slice(-3)}{" "}
-              Sek
+              {(subtotal + 50).toString().includes(".")
+                ? (subtotal + 50).toFixed(2).toString().slice(0, -6) +
+                  " " +
+                  (subtotal + 50).toFixed(2).toString().slice(-6)
+                : (subtotal + 50).toFixed(2).toString().slice(0, -6) +
+                  " " +
+                  (subtotal + 50).toFixed(2).toString().slice(-6)}
+              SEK
             </p>
           </div>
           <div className={"border w-98"}></div>

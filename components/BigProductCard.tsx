@@ -103,7 +103,19 @@ const BigProductCard = (props: any) => {
                   <p>{props.manufacturer}</p>|<p>{props.size}</p>
                 </div>
                 <h2 className="text-center text-5xl font-extrabold">
-                  {props.price * amount}:-
+                  {props.price.toString().includes(".")
+                    ? (props.price * amount)
+                        .toFixed(2)
+                        .toString()
+                        .slice(0, -6) +
+                      " " +
+                      (props.price * amount).toFixed(2).toString().slice(-6)
+                    : (props.price * amount).toString().slice(0, -6) +
+                      " " +
+                      (props.price * amount).toString().slice(-6, -3) +
+                      " " +
+                      (props.price * amount).toString().slice(-3)}
+                  :-{" "}
                 </h2>
                 <div className="flex justify-evenly">
                   <div className="flex justify-evenly text-xl bg-slate-200 border border-black w-32">
