@@ -112,13 +112,9 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       )
       .then(function (response) {
         setPopmsg("Tack för din beställning, glöm inte att betala!");
-        /*         toast.success("Tack för din beställning, glöm inte att betala!");
-        setInterval(() => {
-          window.location.href = "/";
-        }, 3000); */
       })
       .catch(function (error) {
-        console.log(error);
+        setPopmsg(error.response.data);
       });
   };
 

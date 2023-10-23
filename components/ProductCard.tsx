@@ -74,6 +74,7 @@ const Productcard: FC<ProductCardProps> = ({
         }
         updateItemincrease("");
         setStockState(stockState - 1);
+        return;
       }
     }
   }, [itemincrease, title]);
@@ -83,20 +84,24 @@ const Productcard: FC<ProductCardProps> = ({
       if (itemreduce === title) {
         updateItemreduce("");
         setStockState(stockState + 1);
+        return;
       }
     }
   }, [itemreduce, title]);
 
   const minusOne = () => {
     if (amount === 1) {
+      setAmount(1);
       return;
     } else {
       setAmount(amount - 1);
+      return;
     }
   };
 
   const plusOne = () => {
     setAmount(amount + 1);
+    return;
   };
 
   const buyStuffz = (title: string) => {
@@ -107,6 +112,7 @@ const Productcard: FC<ProductCardProps> = ({
 
     if (amount === 0) {
       console.log("You need to buy at least one item");
+      return;
     }
     if (amount >= stockState) {
       toast.error("Not enough items in stock!");
@@ -136,8 +142,10 @@ const Productcard: FC<ProductCardProps> = ({
         stock: stock,
       },
     ]);
+    setStockState(stockState - amount);
     setAmount(1);
     toast.success("Added to cart!");
+    return;
   };
   return (
     <div className={"flex flex-col content-around"}>
