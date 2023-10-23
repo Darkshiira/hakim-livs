@@ -12,16 +12,20 @@ import {
 } from "@/components/ui/alert-dialog";
 
 export const CheckoutPopup = ({
-  children,
+/*   children, */
   msg,
 }: {
-  children: React.ReactNode;
+  /* children: React.ReactNode; */
   msg: string;
 }) => {
+  const { storeID } = useParams();
 
   return (
+    <div>
     <AlertDialog>
-{children}
+      <AlertDialogTrigger type="submit" className={"bg-primary text-primary-foreground hover:bg-primary/90 p-2 w-1/3 rounded"}>
+        KÖP
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{`${msg}`}</AlertDialogTitle>
@@ -31,5 +35,6 @@ export const CheckoutPopup = ({
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
+    </div>
   );
 };
