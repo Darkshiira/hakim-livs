@@ -16,6 +16,17 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -108,10 +119,10 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
       )
       .then(function (response) {
         setPopmsg('Tack för din beställning, glöm inte att betala!')
-        toast.success("Tack för din beställning, glöm inte att betala!");
+/*         toast.success("Tack för din beställning, glöm inte att betala!");
         setInterval(() => {
           window.location.href = "/";
-        }, 3000);
+        }, 3000); */
       })
       .catch(function (error) {
         console.log(error);
@@ -232,10 +243,12 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             </FormItem>
           )}
         />
-         
+      <AlertDialogTrigger type="submit" className="p-2 w-full flex justify-left">
+        KÖP
+      </AlertDialogTrigger>
         
-        <CheckoutPopup msg={popmsg}><Button type="submit">KÖP </Button></CheckoutPopup>
-       
+{/*         <CheckoutPopup msg={popmsg}><Button type="submit">KÖP </Button></CheckoutPopup>
+ */}       
        
       </form>
     </Form>

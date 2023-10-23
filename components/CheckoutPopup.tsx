@@ -18,19 +18,16 @@ export const CheckoutPopup = ({
   children: React.ReactNode;
   msg: string;
 }) => {
-  const { storeID } = useParams();
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger className="p-2 w-full flex justify-left">
-        <div>{children}</div>
-      </AlertDialogTrigger>
+{children}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{`${msg}`}</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction>Ok</AlertDialogAction>
+          <AlertDialogAction onClick={()=>window.location.href = "/"}>Ok</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
