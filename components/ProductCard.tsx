@@ -166,9 +166,11 @@ const Productcard: FC<ProductCardProps> = ({
             ? (price * amount).toFixed(2).toString().slice(0, -6) +
               " " +
               (price * amount).toFixed(2).toString().slice(-6)
-            : (price * amount).toFixed(2).toString().slice(0, -6) +
+            : (price * amount).toString().slice(0, -6) +
               " " +
-              (price * amount).toFixed(2).toString().slice(-6)}
+              (price * amount).toString().slice(-6, -3) +
+              " " +
+              (price * amount).toString().slice(-3)}
           :-{" "}
         </h2>
         <BigProductCard

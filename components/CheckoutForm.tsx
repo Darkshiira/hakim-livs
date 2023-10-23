@@ -21,7 +21,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Basket } from "@/components/BasketType";
 import { useState } from "react";
-
+import {CheckoutPopup} from "@/components/CheckoutPopup"
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
@@ -76,7 +76,10 @@ const formSchema = z.object({
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
   const [disable, setDisable] = useState(false);
+  const [popmsg, setPopmsg]= useState('')
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
+    setPopmsg('Din order skickas, vänta en stund')
     if (disable) return;
     setDisable(true);
     setInterval(() => {
@@ -104,9 +107,11 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
         { sendingData }
       )
       .then(function (response) {
+        setPopmsg('Tack för din beställning, glöm inte att betala!')
         toast.success("Tack för din beställning, glöm inte att betala!");
-
-        window.location.href = "/";
+        setInterval(() => {
+          window.location.href = "/";
+        }, 3000);
       })
       .catch(function (error) {
         console.log(error);
@@ -227,7 +232,11 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             </FormItem>
           )}
         />
-        <Button type="submit">KÖP</Button>
+         
+        
+        <CheckoutPopup msg={popmsg}><Button type="submit">KÖP </Button></CheckoutPopup>
+       
+       
       </form>
     </Form>
   );

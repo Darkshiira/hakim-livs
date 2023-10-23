@@ -111,11 +111,10 @@ const BigProductCard = (props: any) => {
                       " " +
                       (props.price * amount).toFixed(2).toString().slice(-6)
                     : (props.price * amount)
-                        .toFixed(2)
                         .toString()
-                        .slice(0, -6) +
+                        .slice(-6, -3) +
                       " " +
-                      (props.price * amount).toFixed(2).toString().slice(-6)}
+                      (props.price * amount).toFixed(2).toString().slice(-3)}
                   :-{" "}
                 </h2>
                 <div className="flex justify-evenly">
