@@ -57,7 +57,6 @@ const ArticleSection: React.FC = () => {
           const filterdproducts = response.data.filter(
             (product: ProductData) => product.category === category
           );
-          console.log(filterdproducts);
           const sortproducts = filterdproducts.sort(
             (a: ProductData, b: ProductData) =>
               Number(b.isfeatured) - Number(a.isfeatured)
