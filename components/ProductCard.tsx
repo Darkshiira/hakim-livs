@@ -114,10 +114,11 @@ const Productcard: FC<ProductCardProps> = ({
       console.log("You need to buy at least one item");
       return;
     }
-    if (amount >= stockState) {
+    if (amount > stockState) {
       toast.error("Not enough items in stock!");
       return;
     }
+
     if (basket.some((item) => item.title === title)) {
       const index = basket.findIndex((item) => item.title === title);
       const newBasket = [...basket];

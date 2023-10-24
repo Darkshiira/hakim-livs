@@ -25,6 +25,7 @@ const phoneRegex = new RegExp(
 );
 const noNumber = new RegExp(/^([^0-9]*)$/);
 const mustbeNumber = new RegExp(/^([0-9]*)$/);
+const mubeNumberandLetter = new RegExp(/^([0-9a-zA-Z]*)$/);
 
 const formSchema = z.object({
   firstName: z
@@ -60,7 +61,8 @@ const formSchema = z.object({
     .min(5, {
       message: "Du måste fylla i gatuadressen",
     })
-    .max(250, { message: "Gatuadressen är för lång" }),
+    .max(250, { message: "Gatuadressen är för lång" })
+    .regex(mubeNumberandLetter, { message: "Bara nummer och bokstäver!" }),
   zipCode: z
     .string()
     .min(5, { message: "Du måste fylla i postnummer" })
