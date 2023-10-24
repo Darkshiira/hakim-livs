@@ -20,6 +20,7 @@ import axios from "axios";
 import { Basket } from "@/components/BasketType";
 import { useState } from "react";
 import { CheckoutPopup } from "@/components/CheckoutPopup";
+import { Button } from "@/components/ui/button";
 const phoneRegex = new RegExp(
   /^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/
 );
@@ -81,16 +82,10 @@ const formSchema = z.object({
 });
 
 export function CheckoutForm(basket: Basket, subtotal: number) {
-  const [disable, setDisable] = useState(false);
   const [popmsg, setPopmsg] = useState("");
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     setPopmsg("Din order skickas, vänta en stund");
-    if (disable) return;
-    setDisable(true);
-    setInterval(() => {
-      setDisable(false);
-    }, 2000);
 
     const basketerino = basket.map((item) => {
       return {
@@ -234,8 +229,13 @@ export function CheckoutForm(basket: Basket, subtotal: number) {
             </FormItem>
           )}
         />
-
-        <CheckoutPopup msg={popmsg} />
+        {form.formState.isValid ? (
+          <CheckoutPopup msg={popmsg} />
+        ) : (
+          <Button type="submit" className="w-1/3">
+            KÖP
+          </Button>
+        )}
       </form>
     </Form>
   );
