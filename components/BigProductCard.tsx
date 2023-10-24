@@ -51,7 +51,7 @@ const BigProductCard = (props: any) => {
     if (amount === 0) {
       toast.error("You need to buy at least one item");
     }
-    if (amount >= props.stockState) {
+    if (amount > props.stockState) {
       toast.error("Not enough items in stock!");
       return;
     }
