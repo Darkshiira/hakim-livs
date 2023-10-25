@@ -26,7 +26,7 @@ const phoneRegex = new RegExp(
 );
 const noNumber = new RegExp(/^([^0-9]*)$/);
 const mustbeNumber = new RegExp(/^([0-9]*)$/);
-const mubeNumberandLetter = new RegExp(/^([0-9a-zA-Z]*)$/);
+const mubeNumberandLetter = new RegExp(/^[a-zA-Z0-9 ]*$/);
 
 const formSchema = z.object({
   firstName: z
